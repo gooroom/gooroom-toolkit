@@ -295,7 +295,7 @@ GRInstallProgress::start(string strSrc, string strFormat, string strDownloadSrc,
 
     if (!FileExists(execPath))
     {
-        string strConfigDir = PACKAGE_VERDIR;
+        string strConfigDir = SCRATCH_HELPER_SCRIPT;
         execPath = strConfigDir + strSrc;
     }
 

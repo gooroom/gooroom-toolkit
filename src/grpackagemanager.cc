@@ -391,12 +391,6 @@ GRPackageManager::removeDownloadFile(GRPackage* package, string strDownloadPath)
         string strDepDeleteFile = strDownloadPath;
         strDepDeleteFile += "/";
         strDepDeleteFile += depPackage->file();
-           
-        cout << strDepDeleteFile << endl;
-
-        if (remove(strDepDeleteFile.c_str()) ==  0)
-            cout << "delete File [" <<  strDepDeleteFile << "]" << endl;
-        else
-            cout << "Fail Delete" << endl;
+        remove(strDepDeleteFile.c_str());
     }
 }

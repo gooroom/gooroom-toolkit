@@ -75,12 +75,8 @@ void
 grmkit_button_set_icon_from_file (GrmkitButton *button, const char* szFilePath)
 {
     GrmkitButtonPrivate *priv = button->priv;
-
-    GdkPixbuf *pixbuf;
-    pixbuf = gdk_pixbuf_new_from_file (szFilePath, NULL);
-    pixbuf = gdk_pixbuf_scale_simple (pixbuf, 32, 32, GDK_INTERP_HYPER);	
-    gtk_image_set_from_pixbuf (GTK_IMAGE(priv->icon), pixbuf);
-    //gtk_image_set_from_file(GTK_IMAGE(priv->icon), szFilePath);
+    gtk_image_set_from_icon_name (GTK_IMAGE(priv->icon), szFilePath, GTK_ICON_SIZE_BUTTON);
+    gtk_image_set_pixel_size (GTK_IMAGE(priv->icon), 64);
 }
 
 void 

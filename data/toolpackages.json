@@ -8,7 +8,7 @@
                 "file" : "",    
                 "desc" : "Programming system and content development tool",
                 "format" : "air",
-                "icon" : "scratch-48.png",
+                "icon" : "scratch",
                 "version" : "456.0.1",
                 "install_info" : {
                     "src" : "scratch.sh",
@@ -54,7 +54,7 @@
                 "file" : "",
                 "desc" : "Monitor and control remote computers",
                 "format" : "package",
-                "icon" : "veyon-master-48.png",
+                "icon" : "veyon",
                 "version" : "4.1.1",
                 "install_info" : {
                     "src" : "",

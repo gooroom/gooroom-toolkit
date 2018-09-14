@@ -54,9 +54,12 @@ AC_DEFINE_UNQUOTED([DEBUG_MSG], [], ["Output Debug Messasge"])
 AC_FUNC_STRCOLL
 
 AC_CONFIG_FILES([Makefile
-		 data/Makefile
-		 data/gooroom-toolkit.desktop.in
-                 src/Makefile
-		 po/Makefile.in
-		 ])
+data/Makefile
+data/gooroom-toolkit.desktop.in
+data/icons/Makefile
+data/icons/scalable/Makefile
+data/icons/scalable/apps/Makefile
+src/Makefile
+po/Makefile.in
+])
 AC_OUTPUT

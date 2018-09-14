@@ -1,5 +1,6 @@
 sbin_PROGRAMS = gooroom-toolkit 
 
+
 BUILT_SOURCES = \
 	toolkit-resources.c \
 	toolkit-resources.h
@@ -9,6 +10,7 @@ AM_CPPFLAGS = \
 	-DLOCALEDIR=\"$(localedir)\"    \
 	-DPACKAGE_DOWNLOADDIR=\""/var/tmp/download/"\" \
 	-DPACKAGE_VERDIR=\""$(sysconfdir)/gooroom/gooroom-toolkit/"\" \
+	-DSCRATCH_HELPER_SCRIPT=\""$(libdir)/gooroom/gooroom-toolkit/scratch.sh"\" \
 	$(VTE_CFLAGS) \
 	$(GLIB_CFLAGS)	\
 	$(GTK_CFLAGS)	\
@@ -36,6 +38,9 @@ gooroom_toolkit_SOURCES= \
 	grparser.cc		\
 	grmkit-button.c	\
 	$(BUILT_SOURCES)
+
+gooroom_toolkit_helperdir = $(libdir)/gooroom/gooroom-toolkit
+gooroom_toolkit_helper_SCRIPTS = scratch.sh
 
 
 resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/gresource.xml)

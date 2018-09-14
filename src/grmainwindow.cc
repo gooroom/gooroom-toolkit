@@ -101,13 +101,11 @@ GRMainWindow::setPackage(GRPackage* package)
     grmkit_button_set_index (GRMKIT_BUTTON(button), package->getIndex());
 
     string strImagePath = package->icon();
-    if (!strImagePath.empty())
-    {
-        string strConfigDir = PACKAGE_VERDIR;
-        string strPath = strConfigDir + strImagePath;
-        grmkit_button_set_icon_from_file (GRMKIT_BUTTON(button), strPath.c_str());
-    }
+    if (strImagePath.empty())
+        strImagePath = package->name();
     
+    grmkit_button_set_icon_from_file (GRMKIT_BUTTON(button), strImagePath.c_str());
+
     //Button Enable
     string strPackageName = package->name();
     string strPackageVer = package->version();
