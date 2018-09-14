@@ -1,0 +1,13 @@
+data/gooroom-toolkit.desktop.in
+src/grfetchprogress.cc
+src/grinstallprogress.cc
+src/grmainwindow.cc
+src/grpackagemanager.cc
+
+[type: gettext/glade]src/button_main.ui
+[type: gettext/glade]src/window_main.ui
+[type: gettext/glade]src/window_fetch.ui
+[type: gettext/glade]src/window_rgdebinstall_progress.ui
+[type: gettext/glade]src/window_rginstall_progress_msgs.ui
+[type: gettext/glade]src/window_toolinstall_progress.ui
+[type: gettext/glade]src/window_zvtinstallprogress.ui

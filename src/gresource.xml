@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/kr/gooroom/toolkit">
+		<file preprocess="xml-stripblanks">button_main.ui</file>
+	  <file preprocess="xml-stripblanks">window_main.ui</file>
+	  <file preprocess="xml-stripblanks">window_fetch.ui</file>
+	  <file preprocess="xml-stripblanks">window_rgdebinstall_progress.ui</file>
+	  <file preprocess="xml-stripblanks">window_rginstall_progress_msgs.ui</file>
+	  <file preprocess="xml-stripblanks">window_toolinstall_progress.ui</file>
+	  <file preprocess="xml-stripblanks">window_zvtinstallprogress.ui</file>
+  </gresource>
+</gresources>
