@@ -14,3 +14,21 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Gooroom Toolkit"
+msgstr "Gooroom Toolkit"
+
+msgid "Root privileges are required for running this program."
+msgstr "Root privileges are required for running this program."
+
+msgid "Notification"
+msgstr "Notification"
+
+msgid "Exit Program"
+msgstr "Exit Program"
+
+msgid "Run Gooroom Toolkit as root"
+msgstr "Run Gooroom Toolkit as root"
+
+msgid "Authentication is required to run Gooroom Toolkit"
+msgstr "Authentication is required to run Gooroom Toolkit"

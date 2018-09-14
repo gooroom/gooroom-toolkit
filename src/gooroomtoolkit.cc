@@ -30,6 +30,9 @@
 #include <unistd.h>
 #include <libintl.h>
 
+#include <gtk/gtk.h>
+#include <glib/gi18n.h>
+
 int main(int argc, char *argv[])
 {
     bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
@@ -37,6 +40,24 @@ int main(int argc, char *argv[])
     textdomain (GETTEXT_PACKAGE);
     
     gtk_init(&argc, &argv);
+
+    if (getuid () != 0) {
+        GtkWidget *message = gtk_message_dialog_new (NULL,
+                                                     GTK_DIALOG_MODAL,
+                                                     GTK_MESSAGE_ERROR,
+                                                     GTK_BUTTONS_OK,
+                                                     _("Exit Program"));
+
+        gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (message),
+                                 _("Root privileges are required for running this program."));
+
+        gtk_window_set_title (GTK_WINDOW (message), _("Notification"));
+
+        gtk_dialog_run (GTK_DIALOG (message));
+        gtk_widget_destroy (message);
+        return -1;
+    }
+
     
     if (!pkgInitConfig(*_config))
         return false;

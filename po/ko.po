@@ -14,3 +14,21 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Gooroom Toolkit"
+msgstr "구름 도구모음"
+
+msgid "Root privileges are required for running this program."
+msgstr "이 프로그램을 실행하려면 관리자의 권한이 필요합니다."
+
+msgid "Notification"
+msgstr "알림"
+
+msgid "Exit Program"
+msgstr "프로그램 종료"
+
+msgid "Run Gooroom Toolkit as root"
+msgstr "관리자 권한으로 실행"
+
+msgid "Authentication is required to run Gooroom Toolkit"
+msgstr "구름 도구모음을 실행하기 위한 인증이 필요합니다."
