@@ -1,39 +1,41 @@
-#!/bin/sh
+#!/bin/bash
 
-unzipdir=$1
-installdir=$2
+set -xe
 
-echo "$unzipdir"
-echo "$installdir"
+REPOSITORY_URL=http://packages.gooroom.kr/scratch/
+RELEASE_VER=$1
 
-cd $unzipdir 
+[ -z $RELEASE_VER ] && RELEASE_VER=20180920
 
-sudo unzip scratch-gui-develop.zip -d $installdir
+target_dir=/opt
+scratchPath=$target_dir/scratch/
 
-sudo unzip scratch-vm-develop.zip -d $installdir
+_gui='scratch-gui'
+_vm='scratch-vm'
+_blocks='scratch-blocks'
 
-sudo unzip scratch-blocks-develop.zip -d $installdir
+cd $target_dir
+wget -P $target_dir $REPOSITORY_URL/$RELEASE_VER/scratch.tar.gz
 
-cd $installdir
+#if [ $? -ne 0 ]; then exit; fi
+[ $? -ne 0 ] && exit 1
 
-cd scratch-vm-develop
+tar xfz scratch.tar.gz -C $target_dir
+rm scratch.tar.gz
 
+cd $scratchPath
+
+cd $scratchPath$_vm
+npm install
+npm link
+
+cd $scratchPath$_blocks
+npm install
+npm link
+
+cd $scratchPath$_gui
+
+# TODO.
 sudo npm install
 
-sudo npm link
-
-#npm run watch
-
-cd ../scratch-blocks-develop
-
-sudo npm install
-
-sudo npm link
-
-cd ../scratch-gui-develop
-
-sudo npm install
-
-sudo npm link scratch-vm scratch-blocks
-
-sudo npm install
+npm start

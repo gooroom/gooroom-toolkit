@@ -3,9 +3,9 @@
         "package" : [
             {
                 "name" : "scratch",
-                "url" : "",                
+                "url" : "",
                 "addr" : "/opt/scratch/",
-                "file" : "",    
+                "file" : "",
                 "desc" : "Programming system and content development tool",
                 "format" : "air",
                 "icon" : "scratch",
@@ -15,18 +15,17 @@
                     "desc" : "",
                     "format" : "shell"
                 },
-                "dependency" : [ 
+                "dependency" : [
                     {
                         "name" : "nodejs",
                         "format" : "package",
-                        "exec" : "sudo apt-get install nodejs"
+                        "exec" : "sudo apt -y install nodejs"
                     },
                     {
                         "name" : "npm",
                         "format" : "package",
-                        "exec" : "sudo apt-get install npm"
-                    },                      
-                    {
+                        "exec" : "sudo apt -y install npm"
+                    }, {
                         "name" : "scratch-gui",
                         "format" : "archive",
                         "url" : "https://codeload.github.com/LLK/scratch-gui/zip/develop",
@@ -43,12 +42,12 @@
                         "format" : "archive",
                         "url" : "https://codeload.github.com/LLK/scratch-blocks/zip/develop",
                         "file" : "scratch-blocks-develop.zip"
-                    }                                      
+                    }
                 ]
             },
             {
                 "name" : "veyon",
-                "exec" : "sudo apt-get install veyon",
+                "exec" : "sudo apt -y install veyon",
                 "url" : "",
                 "addr" : "",
                 "file" : "",
