@@ -305,7 +305,7 @@ GRPackageManager::startScriptInstall(GRPackage* package)
         _error->Error(_("No packages selected"));
         return OrderResult::Failed;
     }
-
+	
     InstallInfo* info = package->getInstallInfo();
     string strDownloadDir = PACKAGE_DOWNLOADDIR + package->name();
 
@@ -322,7 +322,7 @@ GRPackageManager::startScriptInstall(GRPackage* package)
     }
 
     GRInstallProgress* installProgress = new GRInstallProgress(_win);
-    installProgress->start(info->fileSrc, info->fileFormat, strDownloadDir, strInstallDir);
+    installProgress->start(info->fileSrc, info->fileFormat, package->version(), strDownloadDir);
     _res = installProgress->getResultCode();
     delete installProgress;
 

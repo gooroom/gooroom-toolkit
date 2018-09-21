@@ -37,5 +37,3 @@ cd $scratchPath$_gui
 
 # TODO.
 sudo npm install
-
-npm start

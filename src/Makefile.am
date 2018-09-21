@@ -10,7 +10,7 @@ AM_CPPFLAGS = \
 	-DLOCALEDIR=\"$(localedir)\"    \
 	-DPACKAGE_DOWNLOADDIR=\""/var/tmp/download/"\" \
 	-DPACKAGE_VERDIR=\""$(sysconfdir)/gooroom/gooroom-toolkit/"\" \
-	-DSCRATCH_HELPER_SCRIPT=\""$(libdir)/gooroom/gooroom-toolkit/scratch.sh"\" \
+	-DSCRATCH_HELPER_SCRIPT=\""$(libdir)/gooroom/gooroom-toolkit/"\" \
 	$(VTE_CFLAGS) \
 	$(GLIB_CFLAGS)	\
 	$(GTK_CFLAGS)	\

@@ -9,7 +9,7 @@
                 "desc" : "Programming system and content development tool",
                 "format" : "air",
                 "icon" : "scratch",
-                "version" : "456.0.1",
+                "version" : "20180920",
                 "install_info" : {
                     "src" : "scratch.sh",
                     "desc" : "",
@@ -17,32 +17,15 @@
                 },
                 "dependency" : [
                     {
-                        "name" : "nodejs",
+                        "name" : "git",
                         "format" : "package",
-                        "exec" : "sudo apt -y install nodejs"
+                        "exec" : "sudo apt -y install git"
                     },
                     {
                         "name" : "npm",
                         "format" : "package",
                         "exec" : "sudo apt -y install npm"
-                    }, {
-                        "name" : "scratch-gui",
-                        "format" : "archive",
-                        "url" : "https://codeload.github.com/LLK/scratch-gui/zip/develop",
-                        "file" : "scratch-gui-develop.zip"
-                    },
-                    {
-                        "name" : "scratch-vm",
-                        "format" : "archive",
-                        "url" : "https://codeload.github.com/LLK/scratch-vm/zip/develop",
-                        "file" : "scratch-vm-develop.zip"
-                    },
-                    {
-                        "name" : "scratch-blocks",
-                        "format" : "archive",
-                        "url" : "https://codeload.github.com/LLK/scratch-blocks/zip/develop",
-                        "file" : "scratch-blocks-develop.zip"
-                    }
+                    } 
                 ]
             },
             {

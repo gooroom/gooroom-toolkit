@@ -288,10 +288,9 @@ GRInstallProgress::~GRInstallProgress()
 }
 
 void 
-GRInstallProgress::start(string strSrc, string strFormat, string strDownloadSrc, string strInstallSrc)
+GRInstallProgress::start(string strSrc, string strFormat, string strVersion, string strDownloadSrc)
 {   
     string execPath = strDownloadSrc + "/" + strSrc;
-    cout << execPath << endl;
 
     if (!FileExists(execPath))
     {
@@ -300,7 +299,10 @@ GRInstallProgress::start(string strSrc, string strFormat, string strDownloadSrc,
     }
 
     char szCommand[512];
-    snprintf(szCommand, sizeof(szCommand), "sh %s %s %s", execPath.c_str(), strDownloadSrc.c_str(), strInstallSrc.c_str());
+    if (strVersion.empty())
+        snprintf(szCommand, sizeof(szCommand), "sh %s", execPath.c_str());
+    else
+        snprintf(szCommand, sizeof(szCommand), "sh %s %s", execPath.c_str(), strVersion.c_str());
     start(szCommand, strFormat);
 }
 
