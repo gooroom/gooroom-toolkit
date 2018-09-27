@@ -1,0 +1,7 @@
+[Desktop Entry]
+_Name=NPM Service
+Exec=/usr/bin/pkexec npm start --prefix /opt/scratch/scratch-gui
+Encoding=UTF-8
+Type=Application
+StartupNotify=true
+Terminal=false

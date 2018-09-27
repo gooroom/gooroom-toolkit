@@ -213,10 +213,11 @@ GRInstallProgress::GRInstallProgress(GRMainWindow *main, bool autoClose)
     setenv("APT_LISTCHANGES_FRONTEND", "gtk", FALSE);
     
     _startCounting = false;
+
     _label_status = GTK_WIDGET(gtk_builder_get_object(_builder, "label_status"));
     _pbarTotal = GTK_WIDGET(gtk_builder_get_object(_builder, "progress_total"));
     gtk_progress_bar_set_pulse_step(GTK_PROGRESS_BAR(_pbarTotal), 0.025);
-    
+
     // work around for kdesudo blocking our SIGCHLD (LP: #156041)
     sigset_t sset;
     sigemptyset(&sset);
@@ -276,6 +277,9 @@ GRInstallProgress::GRInstallProgress(GRMainWindow *main, bool autoClose)
     last_term_action = time(NULL);
     
     _cssProvider = gtk_css_provider_new();
+
+    const gchar *msg_status = gtk_label_get_text(GTK_LABEL(_label_status));
+    gtk_label_set_text(GTK_LABEL(_label_status), _(msg_status));
 }
     
 GRInstallProgress::~GRInstallProgress()
@@ -288,14 +292,14 @@ GRInstallProgress::~GRInstallProgress()
 }
 
 void 
-GRInstallProgress::start(string strSrc, string strFormat, string strVersion, string strDownloadSrc)
+GRInstallProgress::start(string strSrc, string strFormat, string strName, string strVersion, string strDownloadSrc)
 {   
     string execPath = strDownloadSrc + "/" + strSrc;
 
     if (!FileExists(execPath))
     {
-        string strConfigDir = SCRATCH_HELPER_SCRIPT;
-        execPath = strConfigDir + strSrc;
+        string strConfigDir = MODULE_INSTALL_SCRIPT_DIR + strName;
+        execPath = strConfigDir + "/" + strSrc;
     }
 
     char szCommand[512];

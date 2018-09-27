@@ -76,7 +76,6 @@ GRPackageManager::initPackage(string strFile)
         _parser->createPackageVersion(strConfigFile);
     }
 
-    //File 유무 확인
     if (FileExists(strFile))
         _packages = _parser->getPackageFromJson(strFile);
 }
@@ -145,7 +144,7 @@ GRPackageManager::downloadPackage(GRPackage* pPackage, bool checkPackage, bool a
         if (checkPackage)
         {        
             char szMsg[512];
-            snprintf(szMsg, sizeof(szMsg), "No <b>%s</b> packages available. Do you want to install?", strName.c_str());
+            snprintf(szMsg, sizeof(szMsg), _("No <b>%s</b> packages available. Do you want to install?"), strName.c_str());
             if (!_userDialog->confirm(szMsg))
             {                        
                 _res = OrderResult::Cancel;
@@ -254,7 +253,7 @@ GRPackageManager::downloadArchive(GRPackage* pPackage)
         bFailed = true;
         string errm = (*I)->ErrorText;
         char szErrorMsg[512];
-        snprintf(szErrorMsg, 512, "Failed to fetch %s\n  %s\n\n", (*I)->DescURI().c_str(), errm.c_str());
+        snprintf(szErrorMsg, 512, _("Failed to fetch %s\n  %s\n\n"), (*I)->DescURI().c_str(), errm.c_str());
         _error->Warning("%s", szErrorMsg);
     }
 
@@ -271,7 +270,6 @@ GRPackageManager::downloadArchive(GRPackage* pPackage)
     
     _res = startScriptInstall(pPackage);
     
-    //다운로드파일 삭제  
     removeDownloadFile(pPackage, strAddr);
     
     fetcher.Shutdown();
@@ -322,7 +320,7 @@ GRPackageManager::startScriptInstall(GRPackage* package)
     }
 
     GRInstallProgress* installProgress = new GRInstallProgress(_win);
-    installProgress->start(info->fileSrc, info->fileFormat, package->version(), strDownloadDir);
+    installProgress->start(info->fileSrc, info->fileFormat, package->name(), package->version(), strDownloadDir);
     _res = installProgress->getResultCode();
     delete installProgress;
 

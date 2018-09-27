@@ -32,3 +32,9 @@ msgstr "Run Gooroom Toolkit as root"
 
 msgid "Authentication is required to run Gooroom Toolkit"
 msgstr "Authentication is required to run Gooroom Toolkit"
+
+msgid "Failed to launch scratch"
+msgstr "Failed to launch scratch"
+
+msgid "You can't launch scratch because the NPM service is not running.\nPlease try again later."
+msgstr "You can't launch scratch because the NPM service is not running.\nPlease try again later."

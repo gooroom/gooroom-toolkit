@@ -32,3 +32,10 @@ msgstr "관리자 권한으로 실행"
 
 msgid "Authentication is required to run Gooroom Toolkit"
 msgstr "구름 도구모음을 실행하기 위한 인증이 필요합니다."
+
+msgid "Failed to launch scratch"
+msgstr "스크래치 실행 실패"
+
+msgid "You can't launch scratch because the NPM service is not running.\nPlease try again later."
+msgstr "NPM서비스가 실행중이 아니므로 스크래치를 실행할 수 없습니다.\n나중에 다시 시도해 주시기 바랍니다."
+

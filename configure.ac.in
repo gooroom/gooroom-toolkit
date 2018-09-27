@@ -45,6 +45,7 @@ dnl ---------------------------------------------------------------------------
 dnl - Dependencies
 dnl ---------------------------------------------------------------------------
 PKG_CHECK_MODULES([GLIB], glib-2.0)
+PKG_CHECK_MODULES([GOBJECT], gobject-2.0)
 PKG_CHECK_MODULES([GTK], gtk+-3.0 >= 2.91.0)
 PKG_CHECK_MODULES([VTE], vte-2.91)
 PKG_CHECK_MODULES([JSONCPP], jsoncpp)
@@ -54,13 +55,23 @@ AC_DEFINE_UNQUOTED([DEBUG_MSG], [], ["Output Debug Messasge"])
 AC_FUNC_STRCOLL
 
 AC_CONFIG_FILES([Makefile
+src/Makefile
+po/Makefile.in
 data/Makefile
 data/gooroom-toolkit.desktop.in
 data/kr.gooroom.toolkit.policy.in
-data/icons/Makefile
-data/icons/scalable/Makefile
-data/icons/scalable/apps/Makefile
-src/Makefile
-po/Makefile.in
+modules/Makefile
+modules/scratch/Makefile
+modules/scratch/src/Makefile
+modules/scratch/src/scratch.desktop.in
+modules/scratch/src/npm-start.desktop.in
+modules/scratch/src/kr.gooroom.pkexec.npm.policy.in
+modules/scratch/icons/Makefile
+modules/scratch/icons/scalable/Makefile
+modules/scratch/icons/scalable/apps/Makefile
+modules/veyon/Makefile
+modules/veyon/icons/Makefile
+modules/veyon/icons/scalable/Makefile
+modules/veyon/icons/scalable/apps/Makefile
 ])
 AC_OUTPUT

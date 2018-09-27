@@ -91,7 +91,7 @@ public:
     virtual ~GRInstallProgress();
     
     void start(string strExecCommand, string strFormat);
-    void start(string strSrc, string strFormat, string strVersion, string strDownloadSrc); 
+    void start(string strSrc, string strFormat, string strName, string strVersion, string strDownloadSrc); 
     OrderResult getResultCode () { return _systemRes; }
 };
 
