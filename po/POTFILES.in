@@ -12,7 +12,4 @@ modules/scratch/src/npm-start.desktop.in
 [type: gettext/glade]src/button_main.ui
 [type: gettext/glade]src/window_main.ui
 [type: gettext/glade]src/window_fetch.ui
-[type: gettext/glade]src/window_rgdebinstall_progress.ui
-[type: gettext/glade]src/window_rginstall_progress_msgs.ui
 [type: gettext/glade]src/window_toolinstall_progress.ui
-[type: gettext/glade]src/window_zvtinstallprogress.ui

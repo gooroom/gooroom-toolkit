@@ -47,25 +47,25 @@ bool GRUserDialog::showErrors()
 {
     if (_error->empty())
         return false;
-    
-    while (!_error->empty()) 
+
+    while (!_error->empty())
     {
         std::string message;
- 	bool iserror = _error->PopMessage(message);
-     
-	// Ignore some stupid error messages.
+        bool iserror = _error->PopMessage(message);
+
+        // Ignore some stupid error messages.
         if (message == "Tried to dequeue a fetching object")
             continue;
-    
-	if (!message.empty()) 
-	{
-      	    if (iserror)
-       	        error(message.c_str());
-  	    else
+
+        if (!message.empty())
+        {
+            if (iserror)
+                error(message.c_str());
+            else
                 warning(message.c_str());
-       }
+        }
     }
-    
+
     return true;
 }
 
@@ -77,8 +77,8 @@ bool GRUserDialog::message(const char *msg,
     GtkResponseType res;
     GtkMessageType gtkmessage;
     GtkButtonsType gtkbuttons;
-    
-    switch (dialog) 
+
+    switch (dialog)
     {
         case GRUserDialog::DialogInfo:
             gtkmessage = GTK_MESSAGE_INFO;
@@ -97,8 +97,8 @@ bool GRUserDialog::message(const char *msg,
             gtkbuttons = GTK_BUTTONS_YES_NO;
             break;
     }
-    
-    switch (buttons) 
+
+    switch (buttons)
     {
         case GRUserDialog::ButtonsDefault:
             break;
@@ -112,16 +112,14 @@ bool GRUserDialog::message(const char *msg,
             gtkbuttons = GTK_BUTTONS_YES_NO;
             break;
     }
-    
+
     dia = gtk_message_dialog_new (GTK_WINDOW(_parentWindow),
                                   GTK_DIALOG_DESTROY_WITH_PARENT,
                                   gtkmessage, gtkbuttons, NULL);
-    GdkPixbuf *icon = get_gdk_pixbuf( "synaptic" );
-    gtk_window_set_icon(GTK_WINDOW(dia), icon);
-    
+
     gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG(dia), utf8(msg));
     gtk_container_set_border_width(GTK_CONTAINER(dia), 6);
-    
+
     if (defres)
     {
         switch (buttons)
@@ -133,34 +131,34 @@ bool GRUserDialog::message(const char *msg,
                 gtk_dialog_set_default_response(GTK_DIALOG(dia), GTK_RESPONSE_YES);
                 break;
         }
-    } 
-    else 
+    }
+    else
     {
-        switch (buttons) 
-	{
+        switch (buttons)
+        {
             case GRUserDialog::ButtonsOkCancel:
-       	        gtk_dialog_set_default_response(GTK_DIALOG(dia), GTK_RESPONSE_CANCEL);
+                gtk_dialog_set_default_response(GTK_DIALOG(dia), GTK_RESPONSE_CANCEL);
                 break;
             case GRUserDialog::ButtonsYesNo:
                 gtk_dialog_set_default_response(GTK_DIALOG(dia), GTK_RESPONSE_NO);
                 break;
         }
     }
-    
+
     g_signal_connect(G_OBJECT(dia), "response", G_CALLBACK(actionResponse), (gpointer) & res);
     
     // honor foreign parent windows (to make embedding easy)
     int id = _config->FindI("Volatile::ParentWindowId", -1);
-    if (id > 0) 
+    if (id > 0)
     {
         GdkWindow *win = gdk_x11_window_foreign_new_for_display(gdk_display_get_default(), id);
-        if(win) 
-	{
+        if(win)
+        {
             gtk_widget_realize(dia);
-	    gdk_window_set_transient_for(GDK_WINDOW(gtk_widget_get_window(dia)), win);
+            gdk_window_set_transient_for(GDK_WINDOW(gtk_widget_get_window(dia)), win);
         }
     }
-    
+
     gtk_dialog_run(GTK_DIALOG(dia));
     gtk_widget_destroy(dia);
 

@@ -18,6 +18,7 @@
 
 #include <glib.h>
 #include <gtk/gtk.h>
+#include <glib/gi18n.h>
 
 #include "grmkit-button.h"
 
@@ -60,18 +61,18 @@ grmkit_button_new (void)
 void
 grmkit_button_set_title (GrmkitButton *button, const char* szTitle)
 {
-    GrmkitButtonPrivate *priv = button->priv;	
-    gtk_label_set_text (GTK_LABEL(priv->lbl_title), szTitle);
+    GrmkitButtonPrivate *priv = button->priv;
+    gtk_label_set_text (GTK_LABEL(priv->lbl_title), _(szTitle));
 }
 
 void
 grmkit_button_set_description (GrmkitButton *button, const char* szDesc)
 {
     GrmkitButtonPrivate *priv = button->priv;
-    gtk_label_set_text (GTK_LABEL(priv->lbl_desc), szDesc);
+    gtk_label_set_text (GTK_LABEL(priv->lbl_desc), _(szDesc));
 }
 
-void 
+void
 grmkit_button_set_icon_from_file (GrmkitButton *button, const char* szFilePath)
 {
     GrmkitButtonPrivate *priv = button->priv;
@@ -79,7 +80,7 @@ grmkit_button_set_icon_from_file (GrmkitButton *button, const char* szFilePath)
     gtk_image_set_pixel_size (GTK_IMAGE(priv->icon), 64);
 }
 
-void 
+void
 grmkit_button_set_index (GrmkitButton *button, int index)
 {
     GrmkitButtonPrivate *priv = button->priv;

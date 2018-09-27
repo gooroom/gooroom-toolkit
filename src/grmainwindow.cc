@@ -33,19 +33,19 @@
 GRMainWindow::GRMainWindow(const char* jsonFile)
    : GRWindow(NULL, "main"), _toolManager(NULL)
 {
-    assert(_win); 
+    assert(_win);
 
     _toolManager = new GRPackageManager(this);
     _toolManager->initPackage(jsonFile);
     _userDialog = new GRUserDialog(_win);
 
     //window
-    gtk_window_set_title (GTK_WINDOW (_win), _("GooroomToolKit"));
+    gtk_window_set_title (GTK_WINDOW (_win), _("Gooroom Toolkit"));
     gtk_window_set_default_size (GTK_WINDOW (_win), 230, 350);
-   
+
     _mainBox = GTK_WIDGET (gtk_builder_get_object (_builder, "box_main"));
     assert(_mainBox);
-          
+
     vector<GRPackage*> packages = _toolManager->getPackages();
 
     int index = 0;
@@ -54,7 +54,7 @@ GRMainWindow::GRMainWindow(const char* jsonFile)
         GRPackage* package =  (GRPackage*)(*I); 
         package->setIndex(index);
         GtkWidget* button = setPackage(package);
-        gtk_box_pack_start (GTK_BOX(_mainBox), button, false, false, 0);                
+        gtk_box_pack_start (GTK_BOX(_mainBox), button, false, false, 0);
         g_signal_connect(G_OBJECT(button), "clicked", (GCallback)btnImageClicked, package);
         index++;
     }
@@ -66,7 +66,7 @@ GRMainWindow::~GRMainWindow()
 {
 #ifdef DEBUG_MSG
     cout << "GRMainWindow::~GRMainWindow()" << endl;
-#endif    
+#endif
 
     close();
 }
@@ -119,22 +119,22 @@ GRMainWindow::setPackage(GRPackage* package)
     return GTK_WIDGET(button);
 }
 
-void 
+void
 GRMainWindow::btnImageClicked(GtkWidget* self, void *data)
 {
-    GRPackage* package = (GRPackage*)data;  
+    GRPackage* package = (GRPackage*)data;
     string strName = package->name();
     char szMsg[512];
-    snprintf(szMsg, sizeof(szMsg), _("Do you want to <b>%s</b> install?"), strName.c_str());
+    snprintf(szMsg, sizeof(szMsg), _("Do you want to <b>%s</b> install?"), _(strName.c_str()));
     
     GRMainWindow* me = (GRMainWindow*)g_object_get_data(G_OBJECT(self), "me");
     assert(me);
     
-    if (!me->getUserDialog()->confirm(szMsg))    
+    if (!me->getUserDialog()->confirm(szMsg))
         return;
 
-    me->getManager()->startDownload(package->getIndex());   
-    me->getManager()->showError();        
+    me->getManager()->startDownload(package->getIndex());
+    me->getManager()->showError();
 
     RGFlushInterface();
 }
@@ -150,9 +150,9 @@ GRMainWindow::updateWindow(int index)
         GrmkitButton* button = (GrmkitButton*)li->data;
         int btnIndex = grmkit_button_get_index(button);
         if (btnIndex == index)
-        {        
+        {
             gtk_widget_set_sensitive(GTK_WIDGET(button), false);
-        }        
-    }    
+        }
+    }
 }
 

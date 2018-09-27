@@ -38,3 +38,102 @@ msgstr "Failed to launch scratch"
 
 msgid "You can't launch scratch because the NPM service is not running.\nPlease try again later."
 msgstr "You can't launch scratch because the NPM service is not running.\nPlease try again later."
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Size"
+msgstr "Size"
+
+msgid "Package"
+msgstr "Package"
+
+msgid "URI"
+msgstr "URI"
+
+msgid "Please insert the disk labeled:\n%s\nin drive %s"
+msgstr "Please insert the disk labeled:\n%s\nin drive %s"
+
+msgid "Download rate: %s/s - %s remaining"
+msgstr "Download rate: %s/s - %s remaining"
+
+msgid "Download rate: ..."
+msgstr "Download rate: ..."
+
+msgid "Downloading file %li of %li"
+msgstr "Downloading file %li of %li"
+
+msgid "Queued"
+msgstr "Queued"
+
+msgid "Done"
+msgstr "Done"
+
+msgid "Hit"
+msgstr "Hit"
+
+msgid "Failed"
+msgstr "Failed"
+
+msgid "Install"
+msgstr "Install"
+
+msgid "Installed"
+msgstr "Installed"
+
+msgid "Copy"
+msgstr "Copy"
+
+msgid "Select All"
+msgstr "Select All"
+
+msgid "Error failed to fork pty"
+msgstr "Error failed to fork pty"
+
+msgid "The package has been installed successfully."
+msgstr "The package has been installed successfully."
+
+msgid "Do you want to <b>%s</b> install?"
+msgstr "Do you want to <b>%s</b> install?"
+
+msgid "No <b>%s</b> packages available. Do you want to install?"
+msgstr "No <b>%s</b> packages available. Do you want to install?"
+
+msgid "Package installation error"
+msgstr "Package installation error"
+
+msgid "Package downloading error"
+msgstr "Package downloading error"
+
+msgid "Error creating directory"
+msgstr "Error creating directory"
+
+msgid "Failed to fetch %s\n  %s\n\n"
+msgstr "Failed to fetch %s\n  %s\n\n"
+
+msgid "Unable to correct missing packages"
+msgstr "Unable to correct missing packages"
+
+msgid "No packages"
+msgstr "No packages"
+
+msgid "No packages selected"
+msgstr "No packages selected"
+
+msgid "scratch"
+msgstr "scratch"
+
+msgid "Programming system and content development tool"
+msgstr "Programming system and content development tool"
+
+msgid "veyon"
+msgstr "veyon"
+
+msgid "Monitor and control remote computers"
+msgstr "Monitor and control remote computers"
+
+msgid "Preparing packages..."
+msgstr "Preparing packages..."
+
+msgid "Details"
+msgstr "Details"

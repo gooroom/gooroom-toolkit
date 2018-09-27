@@ -39,3 +39,102 @@ msgstr "스크래치 실행 실패"
 msgid "You can't launch scratch because the NPM service is not running.\nPlease try again later."
 msgstr "NPM서비스가 실행중이 아니므로 스크래치를 실행할 수 없습니다.\n나중에 다시 시도해 주시기 바랍니다."
 
+msgid "Status"
+msgstr "상태"
+
+msgid "Size"
+msgstr "크기"
+
+msgid "Package"
+msgstr "패키지"
+
+msgid "URI"
+msgstr "패키지 경로"
+
+msgid "Please insert the disk labeled:\n%s\nin drive %s"
+msgstr "레이블이 다음과 같은 디스크를:\n%s\n드라이브 %s에 넣으십시오."
+
+msgid "Download rate: %s/s - %s remaining"
+msgstr "다운로드 속도: %s/s - %s 남음"
+
+msgid "Download rate: ..."
+msgstr "다운로드 속도: ..."
+
+msgid "Downloading file %li of %li"
+msgstr "%2$li개 중 %1$li번째 파일을 다운로드하는 중입니다."
+
+msgid "Queued"
+msgstr "대기"
+
+msgid "Done"
+msgstr "완료"
+
+msgid "Hit"
+msgstr "기존"
+
+msgid "Failed"
+msgstr "실패"
+
+msgid "Install"
+msgstr "설치"
+
+msgid "Installed"
+msgstr "설치완료"
+
+msgid "Copy"
+msgstr "복사"
+
+msgid "Select All"
+msgstr "전체 선택"
+
+msgid "Error failed to fork pty"
+msgstr ""
+
+msgid "The package has been installed successfully."
+msgstr "패키지가 성공적으로 설치되었습니다."
+
+msgid "Do you want to <b>%s</b> install?"
+msgstr "<b>%s</b> 패키지를 설치하시겠습니까?"
+
+msgid "No <b>%s</b> packages available. Do you want to install?"
+msgstr "<b>%s</b> 패키지가 없습니다. 설치하시겠습니까?"
+
+msgid "Package installation error"
+msgstr "패키지 설치 오류"
+
+msgid "Package downloading error"
+msgstr "패키지 다운로드 오류"
+
+msgid "Error creating directory"
+msgstr "디렉토리 생성 오류"
+
+msgid "Failed to fetch %s\n  %s\n\n"
+msgstr "다음을 가져오는 데 실패했습니다 %s\n  %s\n\n"
+
+msgid "Unable to correct missing packages"
+msgstr "누락된 패키지를 수정할 수 없습니다."
+
+msgid "No packages"
+msgstr "패키지 없음"
+
+msgid "No packages selected"
+msgstr "선택된 패키지 없음"
+
+msgid "scratch"
+msgstr "스크래치"
+
+msgid "Programming system and content development tool"
+msgstr "시스템 프로그램 및 컨텐츠 개발 도구"
+
+msgid "veyon"
+msgstr "veyon"
+
+msgid "Monitor and control remote computers"
+msgstr "원격 단말 모니터링 및 제어"
+
+msgid "Preparing packages..."
+msgstr "패키지 설치 중..."
+
+msgid "Details"
+msgstr "세부 내용"
+
