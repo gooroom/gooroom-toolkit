@@ -33,23 +33,24 @@
 #include "grutils.h"
 
 // helper
-GdkPixbuf *
+GdkPixbuf*
 get_gdk_pixbuf(const gchar *name, int size)
 {
     GtkIconTheme *theme;
     GdkPixbuf *pixbuf;
     GError *error = NULL;
-    
+
     theme = gtk_icon_theme_get_default();
     pixbuf = gtk_icon_theme_load_icon(theme, name, size, (GtkIconLookupFlags)0, &error);
 
-    if (pixbuf == NULL) 
+    if (pixbuf == NULL)
         std::cerr << "Warning, failed to load: " << name << error->message << std::endl;
-    
+
     return pixbuf;
 }
 
-GtkWidget *get_gtk_image(const gchar *name, int size)
+GtkWidget*
+get_gtk_image(const gchar *name, int size)
 {
     GdkPixbuf *buf;
     buf = get_gdk_pixbuf(name, size);
@@ -60,10 +61,11 @@ GtkWidget *get_gtk_image(const gchar *name, int size)
     return gtk_image_new_from_pixbuf(buf);
 }
 
-void RGFlushInterface()
+void
+RGFlushInterface()
 {
     XSync(GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), False);
-    
+
     while (gtk_events_pending())
     {
         gtk_main_iteration();
@@ -80,19 +82,20 @@ void RGFlushInterface()
  * mvo: we use out own SizeToStr function as the SI spec says we need a 
  *      space between the number and the unit (this isn't the case in stock apt
  */
-std::string SizeToStr(double Size)
+std::string
+SizeToStr(double Size)
 {
     char S[300];
     double ASize;
     if (Size >= 0)
     {
         ASize = Size;
-    } 
+    }
     else
     {
         ASize = -1 * Size;
     }
-    
+
     /* Bytes, kilobytes, megabytes, gigabytes, terabytes, petabytes, exabytes,
      * zettabytes, yottabytes.
      */
@@ -100,14 +103,14 @@ std::string SizeToStr(double Size)
     int I = 0;
     while (I <= 8)
     {
-        if (ASize < 100 && I != 0) 
-	{
+        if (ASize < 100 && I != 0)
+        {
             snprintf(S, 300, "%.1f %cB", ASize, Ext[I]);
             break;
         }
-        
-        if (ASize < 10000) 
-	{
+
+        if (ASize < 10000)
+        {
             snprintf(S, 300, "%.0f %cB", ASize, Ext[I]);
            break;
         }
@@ -117,7 +120,8 @@ std::string SizeToStr(double Size)
     return S;
 }
 
-const char *utf8_to_locale(const char *str)
+const char*
+utf8_to_locale(const char *str)
 {
     static char *_str = NULL;
     if (str == NULL)
@@ -130,7 +134,8 @@ const char *utf8_to_locale(const char *str)
     return _str;
 }
 
-const char *utf8(const char *str)
+const char*
+utf8(const char *str)
 {
    static char *_str = NULL;
    if (str == NULL)
@@ -143,10 +148,10 @@ const char *utf8(const char *str)
    return _str;
 }
 
-bool 
+bool
 is_directory_exists( const char* path )
 {
-    if ( path == NULL) 
+    if (path == NULL)
         return false;
 
     DIR *pDir;
@@ -156,17 +161,17 @@ is_directory_exists( const char* path )
 
     if (pDir != NULL)
     {
-        bExists = true;    
+        bExists = true;
         (void) closedir (pDir);
     }
 
     return bExists;
 }
 
-bool 
+bool
 create_directory(const char* path)
 {
-    if ( path == NULL) 
+    if ( path == NULL)
         return false;
 
     mode_t mode = S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH;
@@ -187,32 +192,31 @@ create_directory(const char* path)
             if (pos == std::string::npos)
                 return false;
             if (!create_directory(strPath.substr(0, pos).c_str()))
-                return false;   
+                return false;
 
             int ret = mkdir(path, mode);
-            std::cout << ret << std::endl;
             return (0 == ret) ? true : false;
-        }            
-    case EEXIST:    
+        }
+    case EEXIST:
         return is_directory_exists(path);
 
-    }    
+    }
     return true;
 }
 
-bool 
+bool
 delete_directory (const char* path)
 {
     return false;
 }
 
-std::string 
+std::string
 get_find_extension (const char* path)
 {
     string strFileName = path;
 
     if (strFileName.find_last_of(".") != std::string::npos)
         return strFileName.substr(strFileName.find_last_of(".") + 1);
-        
+
     return "";
 }

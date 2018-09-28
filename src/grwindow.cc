@@ -29,9 +29,9 @@ GRWindow::GRWindow(GRWindow *parent, string strName)
 {
     char *filename = NULL;
     char *main_widget = NULL;
-    
+
     filename = g_strdup_printf("/kr/gooroom/toolkit/window_%s.ui", strName.c_str());
-    
+
     _builder = gtk_builder_new_from_resource (filename);
     if (!_builder)
     {
@@ -39,63 +39,59 @@ GRWindow::GRWindow(GRWindow *parent, string strName)
         g_free (filename);
         return;
     }
-    
+
     main_widget = g_strdup_printf("window_%s", strName.c_str());
-    _win = GTK_WIDGET (gtk_builder_get_object (_builder, main_widget));   
-    
+    _win = GTK_WIDGET (gtk_builder_get_object (_builder, main_widget));
+
     gtk_window_set_title(GTK_WINDOW(_win), strName.c_str());
-    
-    // g_signal_connect (window, "destroy",
-    //                 G_CALLBACK (gtk_widget_destroyed), &window);
-    
+
     g_object_set_data(G_OBJECT(_win), "me", this);
-    
+
     g_signal_connect(G_OBJECT(_win), "delete-event", G_CALLBACK(windowCloseCallback), this);
-    
-    
+
     gtk_widget_realize(_win);
-    
+
     if(parent != NULL)
         gtk_window_set_transient_for(GTK_WINDOW(_win), GTK_WINDOW(parent->window()));
-    
-    gtk_window_set_position(GTK_WINDOW(_win), GTK_WIN_POS_CENTER_ON_PARENT);        
-    
+
+    gtk_window_set_position(GTK_WINDOW(_win), GTK_WIN_POS_CENTER_ON_PARENT);
+
     g_free(filename);
-    g_free(main_widget);    
+    g_free(main_widget);
 }
 
 GRWindow::~GRWindow()
 {
-#ifdef DEBUG_MSG    
+#ifdef DEBUG_MSG
     cout<< "~GRWindow" << endl;
-#endif   
+#endif
     g_object_unref (_builder);
     gtk_widget_destroy(_win);
 }
 
-void 
+void
 GRWindow::setTitle(string strTitle)
 {
     gtk_window_set_title(GTK_WINDOW(_win), strTitle.c_str());
 }
 
-bool 
+bool
 GRWindow::close()
 {
-#ifdef DEBUG_MSG    
+#ifdef DEBUG_MSG
     cout<< "GRWindow::close()" << endl;
-#endif    
+#endif
     hide();
     return true;
 }
 
-bool 
+bool
 GRWindow::windowCloseCallback(GtkWidget *window, GdkEvent * event)
 {
 
-#ifdef DEBUG_MSG    
+#ifdef DEBUG_MSG
     cout << "windowCloseCallback" << endl;
-#endif   
+#endif
 
     GRWindow *rwin = (GRWindow *) g_object_get_data(G_OBJECT(window), "me");
 

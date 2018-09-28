@@ -36,7 +36,7 @@ public:
 private:
     string _configFile;
 
-public:    
+public:
     vector <GRPackage*> getPackageFromJson(string jsonFile);
     void createPackageVersion(string jsonFile);
     void updatePackageVersion(string packageName, string version);

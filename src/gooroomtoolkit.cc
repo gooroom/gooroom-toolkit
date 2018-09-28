@@ -33,12 +33,13 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 
-int main(int argc, char *argv[])
+int
+main(int argc, char *argv[])
 {
     bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
     bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
     textdomain (GETTEXT_PACKAGE);
-    
+
     gtk_init(&argc, &argv);
 
     if (getuid () != 0) {
@@ -58,22 +59,21 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    
     if (!pkgInitConfig(*_config))
         return false;
-    
-    string strConfigDir = PACKAGE_VERDIR;
+
+    string strConfigDir = PACKAGE_CONFIGDIR;
     string strInfoFile;
     if (argc == 2)
-        strInfoFile = argv[1];    
-    else               
-        strInfoFile = strConfigDir + "toolpackages.json";     
-    
+        strInfoFile = argv[1];
+    else
+        strInfoFile = strConfigDir + "toolpackages.json";
+
     GRMainWindow *mainWindow = new GRMainWindow(strInfoFile.c_str());
     mainWindow->show();
-    
+
     RGFlushInterface();
-    
+
     gtk_main();
     return 0;
 }

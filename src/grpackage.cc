@@ -27,31 +27,30 @@ GRPackage::GRPackage()
 }
 
 GRPackage::~GRPackage()
-{    
+{
 #ifdef DEBUG_MSG
     g_print ("GRPackage::~GRPackage()\n");
-#endif    
-    
+#endif
+
     for (vector <GRPackage*>::iterator I = _depMoudle.begin(); I != _depMoudle.end(); I++)
     {
         delete (*I);
     }
 }
 
-void 
+void
 GRPackage::addDepModule (GRPackage* package)
 {
-    
     _depMoudle.push_back (package);
 }
 
-vector <GRPackage*> 
+vector <GRPackage*>
 GRPackage::getDepModule()
 {
     return _depMoudle;
 }
 
-int 
+int
 GRPackage::getDepModuleSize()
 {
     return _depMoudle.size();

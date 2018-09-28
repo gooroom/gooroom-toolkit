@@ -31,6 +31,7 @@ typedef struct {
     string  fileSrc;
     string  fileDesc;
     string  fileFormat;
+    string  prestart;
 } InstallInfo;
 
 typedef struct {
@@ -42,29 +43,29 @@ typedef struct {
     string  _format;
     string  _version;
     string  _exec;
-    string  _icon;    
+    string  _icon;
 } PackageInfo;
 
 class GRPackage {
 public:
     GRPackage();
-    ~GRPackage(); 
+    ~GRPackage();
 
 private:
     int _index;
     PackageInfo _packageInfo;
     InstallInfo _installInfo;
     vector <GRPackage*>  _depMoudle;
-    
-public:  
+
+public:
     void addDepModule (GRPackage* package);
-    vector <GRPackage*> getDepModule();      
-    int getDepModuleSize(); 
+    vector <GRPackage*> getDepModule();
+    int getDepModuleSize();
 
     int setIndex(int index) { _index = index; }
-    int getIndex() { return _index; }    
-    
-    void setPackageInfo (PackageInfo info) { _packageInfo = info;}
+    int getIndex() { return _index; }
+
+    void setPackageInfo (PackageInfo info) { _packageInfo = info; }
     void setInstallInfo(InstallInfo info) { _installInfo = info; }
     InstallInfo* getInstallInfo() { return &_installInfo; }
 
@@ -79,13 +80,13 @@ public:
     void setIcon(string icon) { _packageInfo._icon = icon; }
 
     string name()       { return _packageInfo._name; }
-    string url()        { return _packageInfo._url;}
+    string url()        { return _packageInfo._url; }
     string addr()       { return _packageInfo._addr; }
-    string file()       { return _packageInfo._file;}
+    string file()       { return _packageInfo._file; }
     string desc()       { return _packageInfo._desc; }
     string format()     { return _packageInfo._format; }
-    string version()    { return _packageInfo._version; }  
-    string exec()       { return _packageInfo._exec; } 
+    string version()    { return _packageInfo._version; }
+    string exec()       { return _packageInfo._exec; }
     string icon()       { return _packageInfo._icon; }
 };
 

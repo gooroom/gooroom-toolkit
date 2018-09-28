@@ -32,17 +32,17 @@ class GRUserDialog
 {
 public:
     enum ButtonsType {
-       ButtonsDefault,
-       ButtonsOk,
-       ButtonsOkCancel,
-       ButtonsYesNo
+        ButtonsDefault,
+        ButtonsOk,
+        ButtonsOkCancel,
+        ButtonsYesNo
     };
-    
+
     enum DialogType {
-       DialogInfo,
-       DialogWarning,
-       DialogQuestion,
-       DialogError
+        DialogInfo,
+        DialogWarning,
+        DialogQuestion,
+        DialogError
     };
 
 protected:
@@ -52,7 +52,7 @@ public:
     GRUserDialog() : _parentWindow(0) {};
     GRUserDialog(GRWindow *parent) : _parentWindow(parent->window()) {};
     GRUserDialog(GtkWidget *parent) : _parentWindow(parent) {};
-    
+
     bool showErrors();
 
     bool confirm(const char *msg, bool defres = true) {
@@ -70,17 +70,17 @@ public:
 
     void error(const char *msg) {
         message(msg, DialogInfo);
-    };         
+    };
 
     void message_ex(const char *msg) {
         message(msg, DialogError);
-    };           
+    };
 
 private:
     bool message(const char *msg,
-	    GRUserDialog::DialogType dialog=GRUserDialog::DialogInfo,
-	    GRUserDialog::ButtonsType buttons=GRUserDialog::ButtonsOk,
-	    bool defres=true);  
+                 GRUserDialog::DialogType dialog=GRUserDialog::DialogInfo,
+                 GRUserDialog::ButtonsType buttons=GRUserDialog::ButtonsOk,
+                 bool defres=true);
 };
 
 #endif

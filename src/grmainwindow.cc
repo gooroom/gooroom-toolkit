@@ -29,7 +29,7 @@
 #include "grpackage.h"
 #include "gruserdialog.h"
 #include "grmkit-button.h"
-//
+
 GRMainWindow::GRMainWindow(const char* jsonFile)
    : GRWindow(NULL, "main"), _toolManager(NULL)
 {
@@ -142,8 +142,6 @@ GRMainWindow::btnImageClicked(GtkWidget* self, void *data)
 void
 GRMainWindow::updateWindow(int index)
 {
-    //TODO 개선 필요...
-    cout << "UpdateWindow" << index << endl;
     GList *list = gtk_container_get_children(GTK_CONTAINER(_mainBox));
     for (GList *li = g_list_first(list); li != NULL; li = g_list_next(li))
     {

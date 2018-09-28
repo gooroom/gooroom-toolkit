@@ -66,7 +66,7 @@ void
 GRPackageManager::initPackage(string strFile)
 {
     string strConfigDirectory = PACKAGE_VERDIR;
-    string  strConfigFile = strConfigDirectory + ".version.json";
+    string strConfigFile = strConfigDirectory + ".version.json";
     if (!FileExists(strConfigFile))
     {
         bool bIsCreate = create_directory(strConfigDirectory.c_str());
@@ -91,7 +91,7 @@ GRPackageManager::removePackage(int index)
 {
     GRPackage* pPackage = _packages.at(index);
 
-#ifdef DEBUG_MSG    
+#ifdef DEBUG_MSG
     cout << pPackage->name().c_str() << endl;
 #endif
 
@@ -110,7 +110,7 @@ GRPackageManager::removeAllPackage()
     }
 }
 
-void 
+void
 GRPackageManager::addArchive(pkgAcquire *fetcher, GRPackage* pPackage, string strDownloadPath)
 {
     string strName = pPackage->name();
@@ -140,15 +140,15 @@ GRPackageManager::downloadPackage(GRPackage* pPackage, bool checkPackage, bool a
     string strName = pPackage->name();
     gchar* gProgram = g_find_program_in_path(strName.c_str());
     if (gProgram == NULL)
-    {        
+    {
         if (checkPackage)
-        {        
+        {
             char szMsg[512];
             snprintf(szMsg, sizeof(szMsg), _("No <b>%s</b> packages available. Do you want to install?"), strName.c_str());
             if (!_userDialog->confirm(szMsg))
-            {                        
+            {
                 _res = OrderResult::Cancel;
-                return false;                                        
+                return false;
             }
         }
 
@@ -159,11 +159,11 @@ GRPackageManager::downloadPackage(GRPackage* pPackage, bool checkPackage, bool a
 
         if (gProgram == NULL)
         {
-            _error->Error(_("Package installation error"));          
-            return false;              
+            _error->Error(_("Package installation error"));
+            return false;
         }
-    }                
-    g_free(gProgram);  
+    }
+    g_free(gProgram);
 
     return true;
 }
@@ -171,7 +171,7 @@ GRPackageManager::downloadPackage(GRPackage* pPackage, bool checkPackage, bool a
 void
 GRPackageManager::downloadArchive(GRPackage* pPackage)
 {
-    GRMainWindow* me = _win;    
+    GRMainWindow* me = _win;
     GRFetchProgress *pStatus = new GRFetchProgress(me);
     pkgAcquire fetcher(pStatus);
 
@@ -188,7 +188,7 @@ GRPackageManager::downloadArchive(GRPackage* pPackage)
             if (!bIsCreate)
             {
                 _error->Error(_("Error creating directory"));
-                delete pStatus;                    
+                delete pStatus;
             }
         }
     }
@@ -202,29 +202,29 @@ GRPackageManager::downloadArchive(GRPackage* pPackage)
         vector <GRPackage*> depPackages = pPackage->getDepModule();
         for (vector <GRPackage*>::iterator dep = depPackages.begin(); dep != depPackages.end(); dep++)
         {
-            GRPackage* pDepPackage =  (GRPackage*)(*dep);                    
+            GRPackage* pDepPackage =  (GRPackage*)(*dep);
             string strFormat = pDepPackage->format();
 
-            if (strFormat.compare("package") == 0)   
-            {        
-                bool res = downloadPackage(pDepPackage, true, true); 
+            if (strFormat.compare("package") == 0)
+            {
+                bool res = downloadPackage(pDepPackage, true, true);
                 if (!res)
                     return;
             }
-            
+
             if (strFormat.compare("archive") != 0)
                 continue;
 
             string strDepName = pDepPackage->name();
             addArchive(&fetcher, pDepPackage, strDepAddr);
         }
-    }   
+    }
 
     if (fetcher.Run(50000) == pkgAcquire::Failed)
     {
         _error->Error(_("Package downloading error"));
         fetcher.Shutdown();
-        delete pStatus;        
+        delete pStatus;
         return;
     }
 
@@ -232,17 +232,17 @@ GRPackageManager::downloadArchive(GRPackage* pPackage)
     int nNumPackagesTotal = 0;
     bool bTransient = false;
     bool bFailed = false;
-    for (pkgAcquire::ItemIterator I = fetcher.ItemsBegin(); I != fetcher.ItemsEnd(); I++) 
+    for (pkgAcquire::ItemIterator I = fetcher.ItemsBegin(); I != fetcher.ItemsEnd(); I++)
     {
         nNumPackagesTotal += 1;
 
-        if ((*I)->Status == pkgAcquire::Item::StatDone && (*I)->Complete) 
+        if ((*I)->Status == pkgAcquire::Item::StatDone && (*I)->Complete)
         {
             nNumPackages += 1;
             continue;
         }
 
-        if ((*I)->Status == pkgAcquire::Item::StatIdle) 
+        if ((*I)->Status == pkgAcquire::Item::StatIdle)
         {
             bTransient = true;
             continue;
@@ -257,7 +257,7 @@ GRPackageManager::downloadArchive(GRPackage* pPackage)
         _error->Warning("%s", szErrorMsg);
     }
 
-    if (bFailed == true) 
+    if (bFailed == true)
     {
         if (pStatus->IsCancelled())
             _res = OrderResult::Cancel;
@@ -267,13 +267,13 @@ GRPackageManager::downloadArchive(GRPackage* pPackage)
         delete pStatus;
         return;
     }
-    
+
     _res = startScriptInstall(pPackage);
-    
+
     removeDownloadFile(pPackage, strAddr);
-    
+
     fetcher.Shutdown();
-    delete pStatus;          
+    delete pStatus;
 }
 
 void
@@ -285,14 +285,14 @@ GRPackageManager::startDownload(int index)
         _error->Error(_("No packages"));
         return;
     }
-   
+
     string strFormat = pPackage->format();
     if (strFormat.compare("package") == 0)
-        downloadPackage(pPackage, false);   
+        downloadPackage(pPackage, false);
     else
         downloadArchive(pPackage);
-    
-    return;    
+
+    return;
 }
 
 OrderResult
@@ -303,7 +303,7 @@ GRPackageManager::startScriptInstall(GRPackage* package)
         _error->Error(_("No packages selected"));
         return OrderResult::Failed;
     }
-	
+
     InstallInfo* info = package->getInstallInfo();
     string strDownloadDir = PACKAGE_DOWNLOADDIR + package->name();
 
@@ -328,38 +328,40 @@ GRPackageManager::startScriptInstall(GRPackage* package)
     {
         string strName = package->name();
         string strVersion = package->version();
-        _parser->updatePackageVersion(strName, strVersion);  
+        _parser->updatePackageVersion(strName, strVersion);
 
-        //TODO : Change to the signal method..... 
         int index = package->getIndex();
         _win->updateWindow(index);
+
+        string strPrestart = info->prestart;
+        if (!strPrestart.empty())
+            system(strPrestart.c_str());
     }
     return _res;
 }
 
 OrderResult
 GRPackageManager::startPackageInstall(GRPackage* package, bool autoClose)
-{    
+{
     string strExec = package->exec();
     GRInstallProgress* installProgress = new GRInstallProgress(_win, autoClose);
     installProgress->start(strExec, "shell");
     _res = installProgress->getResultCode();
     delete installProgress;
-    
+
     if (_res == OrderResult::Completed)
     {
         string strName = package->name();
         string strVersion = package->version();
-        _parser->updatePackageVersion(strName, strVersion);  
+        _parser->updatePackageVersion(strName, strVersion);
 
-        //TODO : Change to the signal method..... 
         int index = package->getIndex();
         _win->updateWindow(index);
-    }      
+    }
     return _res;
 }
 
-void 
+void
 GRPackageManager::showError()
 {
     if (_res == OrderResult::Failed)
@@ -376,7 +378,7 @@ GRPackageManager::checkVersion(string strPackageName, string strVersion)
 
 void
 GRPackageManager::removeDownloadFile(GRPackage* package, string strDownloadPath)
-{   
+{
     string strDeleteFile = strDownloadPath;
     strDeleteFile += "/";
     strDeleteFile += package->file();

@@ -31,7 +31,7 @@
 GRParser::GRParser()
 {
     string strConfigDirectory = PACKAGE_VERDIR;
-    _configFile = strConfigDirectory + ".version.json";           
+    _configFile = strConfigDirectory + ".version.json";
 }
 
 GRParser::~GRParser()
@@ -39,7 +39,7 @@ GRParser::~GRParser()
 
 }
 
-vector <GRPackage*> 
+vector <GRPackage*>
 GRParser::getPackageFromJson(string jsonFile)
 {
     vector <GRPackage*> vPackages;
@@ -49,8 +49,7 @@ GRParser::getPackageFromJson(string jsonFile)
     json_doc >> value;
 
     Json::Value packages = value["packages"];
-    
-    //TODO Exception...
+
     for (auto &v : packages["package"])
     {
         GRPackage* package = new GRPackage();
@@ -82,12 +81,13 @@ GRParser::getPackageFromJson(string jsonFile)
 
             package->addDepModule(depPackage);
         }
-    
+
         InstallInfo installInfo;
         Json::Value vInstallInfo = v["install_info"];
         installInfo.fileSrc = vInstallInfo["src"].isString() ? vInstallInfo["src"].asString() : "";
-        installInfo.fileDesc = vInstallInfo["desc"].isString() ? vInstallInfo["desc"].asString() : "";        
+        installInfo.fileDesc = vInstallInfo["desc"].isString() ? vInstallInfo["desc"].asString() : "";
         installInfo.fileFormat = vInstallInfo["format"].isString() ? vInstallInfo["format"].asString() : "";
+        installInfo.prestart = vInstallInfo["prestart"].isString() ? vInstallInfo["prestart"].asString() : "";
 
         PackageInfo packageInfo;
         packageInfo._name = name;
@@ -105,8 +105,6 @@ GRParser::getPackageFromJson(string jsonFile)
         vPackages.push_back(package);
     }
 
-    //fclose(value);
-
     return vPackages;
 }
 
@@ -122,23 +120,22 @@ GRParser::createPackageVersion(string strFile)
     Json::StyledWriter writer;
     std::string ouputConfig = writer.write(root);
 
-    
     FILE* jsonFile = NULL;
     fopen_s(&jsonFile, strFile.c_str(), "wb");
 
     if (jsonFile == nullptr)
         return;
-    
+
 
     size_t fileSize = fwrite(ouputConfig.c_str(), 1, ouputConfig.length(), jsonFile);
-    fclose(jsonFile);    
+    fclose(jsonFile);
 }
 
 void
 GRParser::updatePackageVersion(string packageName, string version)
 {
     cout << "updatePackageVersion" << endl;
-    
+
     vector <GRPackage*> vPackages;
 
     Json::Value root;
@@ -150,21 +147,21 @@ GRParser::updatePackageVersion(string packageName, string version)
     bool bCreate = true;
     int size = packages.size();
 
-    if (size > 0)    
-    {        
+    if (size > 0)
+    {
         for (auto &v : root["packages"])
         {
             string strName = v["name"].isString() ? v["name"].asString() : "";
             if (strName.compare(packageName) == 0)
-            {                
+            {
                 bCreate = false;
                 v["version"] = version;
-            }                                 
+            }
         }
     }
 
     if (bCreate)
-    {    
+    {
         Json::Value  value;
         value["name"] = packageName;
         value["version"] = version;
@@ -179,12 +176,12 @@ GRParser::updatePackageVersion(string packageName, string version)
 
     if (jsonFile == nullptr)
         return;
-  
+
     size_t fileSize = fwrite(ouputConfig.c_str(), 1, ouputConfig.length(), jsonFile);
-    fclose(jsonFile);       
+    fclose(jsonFile);
 }
 
-bool 
+bool
 GRParser::checkInstallPackageVersion(string packageName, string version)
 {
     vector <GRPackage*> vPackages;
@@ -196,18 +193,18 @@ GRParser::checkInstallPackageVersion(string packageName, string version)
     Json::Value packages = root["packages"];
     int size = packages.size();
 
-    if (size > 0)    
-    {        
+    if (size > 0)
+    {
         for (auto &v : root["packages"])
         {
             string strName = v["name"].isString() ? v["name"].asString() : "";
             if (strName.compare(packageName) == 0)
-            {                
+            {
                 string strVersion = v["version"].isString() ? v["version"].asString() : "";
                 if (strVersion.compare(version) == 0)
                     return true;
-            }                                 
+            }
         }
-    }    
+    }
     return false;
 }

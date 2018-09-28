@@ -13,7 +13,8 @@
                 "install_info" : {
                     "src" : "scratch.sh",
                     "desc" : "",
-                    "format" : "shell"
+                    "format" : "shell",
+                    "prestart" : "sudo npm start --prefix /opt/scratch/scratch-gui &"
                 },
                 "dependency" : [
                     {

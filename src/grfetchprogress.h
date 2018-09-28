@@ -39,32 +39,29 @@ class GRFetchProgress : public pkgAcquireStatus, public GRWindow {
        string size;
        int status;
     };
-    
+
     vector<Item> _items;
-    
+
     GtkWidget *_table;
     GtkListStore *_tableListStore;
     set<int> _tableRows;
-    
+
     GtkWidget *_mainProgressBar; // GtkProgressBar
-    
+
     GtkWidget *_sock;
-    
+
     //PangoLayout *_layout;
     GtkTreeViewColumn *_statusColumn;
     GtkCellRenderer *_statusRenderer;
     bool _cancelled;
-    
+
     void updateStatus(pkgAcquire::ItemDesc & Itm, int status);
     static void stopDownload(GtkWidget *self, void *data);
-    
-    static void cursorChanged(GtkTreeView *treeview,
-         		     gpointer user_data);
-    static void expanderActivate(GObject    *object,
-         			GParamSpec *param_spec,
-         			gpointer    user_data);
+
+    static void cursorChanged(GtkTreeView *treeview, gpointer user_data);
+    static void expanderActivate(GObject *object, GParamSpec *param_spec, gpointer user_data);
     bool _cursorDirty;
-    
+
     char *getStatusStr(int status);
     int getStatusPercent(int status);
     void refreshTable(int row, bool append = false);
@@ -79,12 +76,12 @@ public:
     virtual void Start();
     virtual void Stop();
     virtual bool close();
-    
+
     bool Pulse(pkgAcquire * Owner);
     bool IsCancelled() { return _cancelled; }
     // set description of the current task (main and additonal explaination)
     void setDescription(string mainText, string secondText="");
-    
+
     GRFetchProgress(GRWindow *win);
 };
 

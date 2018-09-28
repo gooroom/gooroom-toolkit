@@ -37,13 +37,15 @@
 #include "gruserdialog.h"
 #include "grutils.h"
 
-static void actionResponse(GtkDialog *dialog, gint id, gpointer user_data)
+static void
+actionResponse(GtkDialog *dialog, gint id, gpointer user_data)
 {
     GtkResponseType *res = (GtkResponseType *) user_data;
     *res = (GtkResponseType) id;
 }
 
-bool GRUserDialog::showErrors()
+bool
+GRUserDialog::showErrors()
 {
     if (_error->empty())
         return false;
@@ -69,9 +71,10 @@ bool GRUserDialog::showErrors()
     return true;
 }
 
-bool GRUserDialog::message(const char *msg,
-                           GRUserDialog::DialogType dialog,
-                           GRUserDialog::ButtonsType buttons, bool defres)
+bool
+GRUserDialog::message(const char *msg,
+                      GRUserDialog::DialogType dialog,
+                      GRUserDialog::ButtonsType buttons, bool defres)
 {
     GtkWidget *dia;
     GtkResponseType res;

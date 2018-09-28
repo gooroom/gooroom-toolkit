@@ -1,4 +1,4 @@
-sbin_PROGRAMS = gooroom-toolkit 
+sbin_PROGRAMS = gooroom-toolkit
 
 
 BUILT_SOURCES = \
@@ -9,13 +9,14 @@ AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DLOCALEDIR=\"$(localedir)\"    \
 	-DPACKAGE_DOWNLOADDIR=\""/var/tmp/download/"\" \
-	-DPACKAGE_VERDIR=\""$(sysconfdir)/gooroom/gooroom-toolkit/"\" \
+	-DPACKAGE_VERDIR=\""/var/cache/gooroom/gooroom-toolkit/"\" \
+	-DPACKAGE_CONFIGDIR=\""$(sysconfdir)/gooroom/gooroom-toolkit/"\" \
 	-DMODULE_INSTALL_SCRIPT_DIR=\""$(datadir)/gooroom/toolkit/modules/"\" \
 	$(VTE_CFLAGS) \
 	$(GLIB_CFLAGS)	\
 	$(GTK_CFLAGS)	\
 	$(JSONCPP_CFLAGS)
-	
+
 gooroom_toolkit_LDADD = \
 	$(GTK_LIBS) 	\
 	$(GLIB_LIBS) 	\

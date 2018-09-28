@@ -45,6 +45,6 @@ class GRWindow {
     inline virtual void hide() { gtk_widget_hide(_win); };
     inline virtual void show() { gtk_widget_show(_win); };
 
-    GtkBuilder* getGtkBuilder() {return _builder;};   
+    GtkBuilder* getGtkBuilder() {return _builder;};
 };
 #endif

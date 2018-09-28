@@ -34,64 +34,64 @@ using namespace Result;
 
 class GRMainWindow;
 
-class GRInstallProgress: public GRWindow 
+class GRInstallProgress: public GRWindow
 {
     typedef enum {
         EDIT_COPY,
-  	EDIT_SELECT_ALL,
-  	EDIT_SELECT_NONE,
+        EDIT_SELECT_ALL,
+        EDIT_SELECT_NONE,
     } TermAction;
-    
+
     // widgets
     GtkWidget *_label_status;
     GtkWidget *_labelSummary;
     GtkWidget *_pbarTotal;
-    GtkWidget *_term; 
+    GtkWidget *_term;
     GtkWidget *_popupMenu; // Popup menu of the terminal
-    
+
     GtkWidget *_sock; // if we run embedded
     GtkCssProvider *_cssProvider;
     GRUserDialog *_userDialog;
-    
+
     OrderResult _systemRes;
-    
+
     bool child_has_exited;
     bool _startCounting;
     bool _updateFinished;
     bool _autoClose;
-    
+
     int _childin;
     int _progress;
     int _totalActions;
     int _terminalTimeout; // when the internal terminal timesout after no activity
-    
+
     pid_t _child_id;
     time_t last_term_action; // last time something changed
-    
+
     static void child_exited(VteTerminal *vteterminal, gint ret, gpointer data);
-    static void terminalAction(GtkWidget *terminal, TermAction action); 
+    static void terminalAction(GtkWidget *terminal, TermAction action);
 
 protected:
     void startUpdate();
     void updateInterface();
     void finishUpdate();
     virtual bool close();
-    
+
     // gtk stuff
     static void cbCancel(GtkWidget *self, void *data);
     static void cbClose(GtkWidget *self, void *data);
-    static void content_changed(GObject *object, gpointer    user_data);
+    static void content_changed(GObject *object, gpointer user_data);
     static void expander_callback(GObject *object,GParamSpec *param_spec, gpointer user_data);
-    
+
     static gboolean cbTerminalClicked(GtkWidget *widget, GdkEventButton *event, gpointer user_data);
     static void cbMenuitemClicked(GtkMenuItem *menuitem, gpointer user_data);
 
 public:
     GRInstallProgress(GRMainWindow *main, bool autoClose = false);
     virtual ~GRInstallProgress();
-    
+
     void start(string strExecCommand, string strFormat);
-    void start(string strSrc, string strFormat, string strName, string strVersion, string strDownloadSrc); 
+    void start(string strSrc, string strFormat, string strName, string strVersion, string strDownloadSrc);
     OrderResult getResultCode () { return _systemRes; }
 };
 

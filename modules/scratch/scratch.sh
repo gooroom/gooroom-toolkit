@@ -36,4 +36,5 @@ npm link
 cd $scratchPath$_gui
 
 # TODO.
-sudo npm install
+sudo npm install && sleep 3s
+echo npm start
