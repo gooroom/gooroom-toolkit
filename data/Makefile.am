@@ -1,3 +1,5 @@
+SUBDIRS = icons
+
 gooroom_toolkit_confdir = $(sysconfdir)/gooroom/gooroom-toolkit
 gooroom_toolkit_conf_DATA = toolpackages.json
 

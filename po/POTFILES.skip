@@ -1,5 +1,2 @@
 data/gooroom-toolkit.desktop.in.in
 data/kr.gooroom.toolkit.policy.in.in
-modules/scratch/src/scratch.desktop.in.in
-modules/scratch/src/kr.gooroom.pkexec.npm.policy.in.in
-modules/scratch/src/npm-start.desktop.in.in

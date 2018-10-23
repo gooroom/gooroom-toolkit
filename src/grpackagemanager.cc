@@ -371,8 +371,23 @@ GRPackageManager::showError()
 }
 
 bool
-GRPackageManager::checkVersion(string strPackageName, string strVersion)
+GRPackageManager::isInstallPackage(string strPackageName, string strVersion, string strFormat)
 {
+    if (strFormat.compare("package") == 0)
+    {
+        gchar* gProgram = g_find_program_in_path(strPackageName.c_str());
+        if (gProgram == NULL)
+        {
+            bool bCheck =  _parser->checkInstallPackageVersion(strPackageName, strVersion);
+            if (bCheck)
+                _parser->deletePackage(strPackageName);
+
+            return false;
+        }
+        g_free(gProgram);
+        return true;
+    }
+
     return _parser->checkInstallPackageVersion(strPackageName, strVersion);
 }
 

@@ -41,16 +41,16 @@ class GRPackageManager {
 public:
     GRPackageManager(GRMainWindow* win);
     ~GRPackageManager();
-    
+
     //enum OrderResult {Completed,Failed,Incomplete, Cancel};
 
-    void initPackage(string strFile);  
-    void startDownload(int index);        
+    void initPackage(string strFile);
+    void startDownload(int index);
     void removePackage(int index);
     void removeAllPackage();
     void showError();
-    bool checkVersion(string packageName, string version);
-    
+    bool isInstallPackage(string strPackageName, string strVersion, string strFormat);
+
     vector<GRPackage*> getPackages();
 
 private:
@@ -66,7 +66,7 @@ private:
     GRParser* _parser;
     GRUserDialog *_userDialog;
     OrderResult _res;
-    vector<GRPackage*> _packages; //TODO 매니저에서 사용하도록 만들것!!
+    vector<GRPackage*> _packages;
 };
 
 #endif

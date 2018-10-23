@@ -33,12 +33,6 @@ msgstr "관리자 권한으로 실행"
 msgid "Authentication is required to run Gooroom Toolkit"
 msgstr "구름 도구모음을 실행하기 위한 인증이 필요합니다."
 
-msgid "Failed to launch scratch"
-msgstr "스크래치 실행 실패"
-
-msgid "You can't launch scratch because the NPM service is not running.\nPlease try again later."
-msgstr "NPM서비스가 실행중이 아니므로 스크래치를 실행할 수 없습니다.\n나중에 다시 시도해 주시기 바랍니다."
-
 msgid "Status"
 msgstr "상태"
 
@@ -123,14 +117,20 @@ msgstr "선택된 패키지 없음"
 msgid "scratch"
 msgstr "스크래치"
 
-msgid "Programming system and content development tool"
-msgstr "시스템 프로그램 및 컨텐츠 개발 도구"
+msgid "gooroom-scratch-helper"
+msgstr "스크래치"
+
+msgid "Software training tool"
+msgstr "소프트웨어 교육 도구"
 
 msgid "veyon"
 msgstr "veyon"
 
-msgid "Monitor and control remote computers"
-msgstr "원격 단말 모니터링 및 제어"
+msgid "veyon-master"
+msgstr "veyon"
+
+msgid "Remote administration tool"
+msgstr "원격 관리 도구"
 
 msgid "Preparing packages..."
 msgstr "패키지 설치 중..."
@@ -138,3 +138,11 @@ msgstr "패키지 설치 중..."
 msgid "Details"
 msgstr "세부 내용"
 
+msgid "The Gooroom Tookit provides users with the ability to install applications that are not contained in Gooroom."
+msgstr "Gooroom에 포함되지 않은 프로그램을 설치할 수 있습니다."
+
+msgid "Cancel"
+msgstr "취소"
+
+msgid "Close"
+msgstr "닫기"

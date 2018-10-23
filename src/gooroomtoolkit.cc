@@ -33,14 +33,37 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 
+static GtkWidget *window;
+
+static void
+on_app_startup_cb (GtkApplication *app, gpointer data)
+{
+    string strConfigDir = PACKAGE_CONFIGDIR;
+    string strInfoFile = strConfigDir + "toolpackages.json";
+
+    GRMainWindow *mainWindow = new GRMainWindow(strInfoFile.c_str());
+    mainWindow->setApplication(app);
+    window = mainWindow->window();
+    gtk_application_add_window(app, GTK_WINDOW(window));
+
+    RGFlushInterface();
+}
+
+static void
+on_app_activate_cb (GtkApplication *app)
+{
+    gtk_window_present (GTK_WINDOW (window));
+}
+
 int
 main(int argc, char *argv[])
 {
+    int status;
+    GtkApplication *app;
+
     bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
     bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
     textdomain (GETTEXT_PACKAGE);
-
-    gtk_init(&argc, &argv);
 
     if (getuid () != 0) {
         GtkWidget *message = gtk_message_dialog_new (NULL,
@@ -59,21 +82,14 @@ main(int argc, char *argv[])
         return -1;
     }
 
-    if (!pkgInitConfig(*_config))
-        return false;
+    app = gtk_application_new ("kr.gooroom.gooroom-toolkit", G_APPLICATION_FLAGS_NONE);
 
-    string strConfigDir = PACKAGE_CONFIGDIR;
-    string strInfoFile;
-    if (argc == 2)
-        strInfoFile = argv[1];
-    else
-        strInfoFile = strConfigDir + "toolpackages.json";
+    g_signal_connect (app, "activate", G_CALLBACK (on_app_activate_cb), NULL);
+    g_signal_connect (app, "startup", G_CALLBACK (on_app_startup_cb), NULL);
 
-    GRMainWindow *mainWindow = new GRMainWindow(strInfoFile.c_str());
-    mainWindow->show();
+    status = g_application_run (G_APPLICATION (app), argc, argv);
 
-    RGFlushInterface();
+    g_object_unref (app);
 
-    gtk_main();
-    return 0;
+    return status;
 }

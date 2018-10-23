@@ -2,48 +2,26 @@
     "packages" : {
         "package" : [
             {
-                "name" : "scratch",
+                "name" : "gooroom-scratch-helper",
+                "exec" : "sudo apt -y install gooroom-scratch-helper",
                 "url" : "",
-                "addr" : "/opt/scratch/",
+                "addr" : "",
                 "file" : "",
-                "desc" : "Programming system and content development tool",
-                "format" : "air",
-                "icon" : "scratch",
-                "version" : "20180920",
-                "install_info" : {
-                    "src" : "scratch.sh",
-                    "desc" : "",
-                    "format" : "shell",
-                    "prestart" : "sudo npm start --prefix /opt/scratch/scratch-gui &"
-                },
-                "dependency" : [
-                    {
-                        "name" : "git",
-                        "format" : "package",
-                        "exec" : "sudo apt -y install git"
-                    },
-                    {
-                        "name" : "npm",
-                        "format" : "package",
-                        "exec" : "sudo apt -y install npm"
-                    } 
-                ]
+                "desc" : "Software training tool",
+                "format" : "package",
+                "icon" : "scratch_tool",
+                "version" : "20180920"
             },
             {
-                "name" : "veyon",
+                "name" : "veyon-master",
                 "exec" : "sudo apt -y install veyon",
                 "url" : "",
                 "addr" : "",
                 "file" : "",
-                "desc" : "Monitor and control remote computers",
+                "desc" : "Remote administration tool",
                 "format" : "package",
-                "icon" : "veyon",
-                "version" : "4.1.1",
-                "install_info" : {
-                    "src" : "",
-                    "desc" : "",
-                    "format" : ""
-                }                
+                "icon" : "veyon_tool",
+                "version" : "4.1.1"
             }
         ]
     }

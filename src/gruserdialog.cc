@@ -149,19 +149,8 @@ GRUserDialog::message(const char *msg,
     }
 
     g_signal_connect(G_OBJECT(dia), "response", G_CALLBACK(actionResponse), (gpointer) & res);
-    
-    // honor foreign parent windows (to make embedding easy)
-    int id = _config->FindI("Volatile::ParentWindowId", -1);
-    if (id > 0)
-    {
-        GdkWindow *win = gdk_x11_window_foreign_new_for_display(gdk_display_get_default(), id);
-        if(win)
-        {
-            gtk_widget_realize(dia);
-            gdk_window_set_transient_for(GDK_WINDOW(gtk_widget_get_window(dia)), win);
-        }
-    }
 
+    // honor foreign parent windows (to make embedding easy)
     gtk_dialog_run(GTK_DIALOG(dia));
     gtk_widget_destroy(dia);
 

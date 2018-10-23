@@ -39,11 +39,14 @@ class GRMainWindow : public GRWindow {
         TOOLPACKAGE_NAME = 0,
         TOOLPACKAGE_URL,
         NUM_COLUMNS
-    };  
-    public:  
+    };
+    public:
         GtkWidget* _mainBox;
+        GtkWidget* _closeButton;
 
-    private:               
+    private:
+        GtkApplication* _app;
+
         GRPackageManager* _toolManager;
         GRUserDialog* _userDialog;
 
@@ -58,7 +61,11 @@ class GRMainWindow : public GRWindow {
         GRUserDialog* getUserDialog() {return _userDialog; }
 
         GtkWidget* setPackage(GRPackage* package);
-        static void btnImageClicked(GtkWidget *self, void *data);                
+        void setApplication(GtkApplication *app) { _app = app; }
+        GtkApplication* getApplication() { return _app; }
+
+        static void btnImageClicked(GtkWidget *self, void *data);
+        static void btnCloseClicked(GtkWidget *self, void *data);
 };
 
 #endif

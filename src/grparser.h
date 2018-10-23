@@ -39,6 +39,7 @@ private:
 public:
     vector <GRPackage*> getPackageFromJson(string jsonFile);
     void createPackageVersion(string jsonFile);
+    void deletePackage(string packageName);
     void updatePackageVersion(string packageName, string version);
     bool checkInstallPackageVersion(string packageName, string version);
 };

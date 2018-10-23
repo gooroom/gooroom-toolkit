@@ -33,12 +33,6 @@ msgstr "Run Gooroom Toolkit as root"
 msgid "Authentication is required to run Gooroom Toolkit"
 msgstr "Authentication is required to run Gooroom Toolkit"
 
-msgid "Failed to launch scratch"
-msgstr "Failed to launch scratch"
-
-msgid "You can't launch scratch because the NPM service is not running.\nPlease try again later."
-msgstr "You can't launch scratch because the NPM service is not running.\nPlease try again later."
-
 msgid "Status"
 msgstr "Status"
 
@@ -123,17 +117,32 @@ msgstr "No packages selected"
 msgid "scratch"
 msgstr "scratch"
 
-msgid "Programming system and content development tool"
-msgstr "Programming system and content development tool"
+msgid "gooroom-scratch-helper"
+msgstr "scratch"
+
+msgid "Software training tool"
+msgstr "Software training tool"
 
 msgid "veyon"
 msgstr "veyon"
 
-msgid "Monitor and control remote computers"
-msgstr "Monitor and control remote computers"
+msgid "veyon-master"
+msgstr "veyon"
+
+msgid "Remote administration tool"
+msgstr "Remote administration tool"
 
 msgid "Preparing packages..."
 msgstr "Preparing packages..."
 
 msgid "Details"
 msgstr "Details"
+
+msgid "The Gooroom Tookit provides users with the ability to install applications that are not contained in Gooroom."
+msgstr "The Gooroom Tookit provides users with the ability to install applications that are not contained in Gooroom."
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Close"
+msgstr "Close"

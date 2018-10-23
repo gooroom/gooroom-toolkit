@@ -94,3 +94,10 @@ grmkit_button_get_index (GrmkitButton *button)
 
     return priv->index;
 }
+
+const gchar*
+grmkit_button_get_title (GrmkitButton *button)
+{
+    GrmkitButtonPrivate *priv = button->priv;
+    return gtk_label_get_text (GTK_LABEL(priv->lbl_title));
+}

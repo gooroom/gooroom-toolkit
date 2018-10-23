@@ -41,7 +41,7 @@ GRMainWindow::GRMainWindow(const char* jsonFile)
 
     //window
     gtk_window_set_title (GTK_WINDOW (_win), _("Gooroom Toolkit"));
-    gtk_window_set_default_size (GTK_WINDOW (_win), 230, 350);
+    gtk_window_set_default_size (GTK_WINDOW (_win), 230, 196);
 
     _mainBox = GTK_WIDGET (gtk_builder_get_object (_builder, "box_main"));
     assert(_mainBox);
@@ -51,13 +51,16 @@ GRMainWindow::GRMainWindow(const char* jsonFile)
     int index = 0;
     for (vector <GRPackage*>::iterator I = packages.begin(); I != packages.end(); I++)
     {
-        GRPackage* package =  (GRPackage*)(*I); 
+        GRPackage* package =  (GRPackage*)(*I);
         package->setIndex(index);
         GtkWidget* button = setPackage(package);
         gtk_box_pack_start (GTK_BOX(_mainBox), button, false, false, 0);
-        g_signal_connect(G_OBJECT(button), "clicked", (GCallback)btnImageClicked, package);
+        g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(btnImageClicked), package);
         index++;
     }
+
+    _closeButton = GTK_WIDGET (gtk_builder_get_object (_builder, "close_button"));
+    g_signal_connect (G_OBJECT(_closeButton), "clicked", G_CALLBACK(btnCloseClicked), this);
 
     gtk_widget_show_all(_mainBox);
 }
@@ -71,50 +74,61 @@ GRMainWindow::~GRMainWindow()
     close();
 }
 
-bool 
+bool
 GRMainWindow::close()
 {
 #ifdef DEBUG_MSG
     cout << "GRMainWindow::close()" << endl;
-#endif    
+#endif
 
     if (_toolManager)
         delete _toolManager;
 
     if (_userDialog)
         delete _userDialog;
-    
-    gtk_main_quit();
 
+    g_application_quit(G_APPLICATION(_app));
     return true;
 }
 
-GtkWidget* 
+GtkWidget*
 GRMainWindow::setPackage(GRPackage* package)
 {
     string strName = package->name();
     string strDesc = package->desc();
 
     GrmkitButton* button = grmkit_button_new();
-    grmkit_button_set_title (GRMKIT_BUTTON(button), strName.c_str());
     grmkit_button_set_description (GRMKIT_BUTTON(button), strDesc.c_str());
     grmkit_button_set_index (GRMKIT_BUTTON(button), package->getIndex());
 
     string strImagePath = package->icon();
     if (strImagePath.empty())
+    {
         strImagePath = package->name();
-    
+        strImagePath += "_tool";
+    }
+
     grmkit_button_set_icon_from_file (GRMKIT_BUTTON(button), strImagePath.c_str());
 
     //Button Enable
-    string strPackageName = package->name();
-    string strPackageVer = package->version();
+    string strVersion = package->version();
+    string strFormat = package->format();
 
-    bool isDisabled = _toolManager->checkVersion(strPackageName, strPackageVer);
+    gchar* title;
+    bool isDisabled = _toolManager->isInstallPackage(strName, strVersion, strFormat);
     if (isDisabled)
-        gtk_widget_set_sensitive(GTK_WIDGET(button), FALSE);
+    {
+        gtk_widget_set_sensitive(GTK_WIDGET(button), false);
+        title = g_strdup_printf ("%s (%s)", _(strName.c_str()), _("Installed"));
+    }
+    else
+    {
+        title = g_strdup_printf ("%s", strName.c_str());
+    }
 
+    grmkit_button_set_title (GRMKIT_BUTTON(button), title);
     g_object_set_data(G_OBJECT(button), "me", this);
+    g_free (title);
 
     return GTK_WIDGET(button);
 }
@@ -126,12 +140,15 @@ GRMainWindow::btnImageClicked(GtkWidget* self, void *data)
     string strName = package->name();
     char szMsg[512];
     snprintf(szMsg, sizeof(szMsg), _("Do you want to <b>%s</b> install?"), _(strName.c_str()));
-    
+
     GRMainWindow* me = (GRMainWindow*)g_object_get_data(G_OBJECT(self), "me");
     assert(me);
-    
+
     if (!me->getUserDialog()->confirm(szMsg))
         return;
+
+    GtkWidget* closeButton = me->_closeButton;
+    gtk_widget_set_sensitive (closeButton, false);
 
     me->getManager()->startDownload(package->getIndex());
     me->getManager()->showError();
@@ -142,15 +159,28 @@ GRMainWindow::btnImageClicked(GtkWidget* self, void *data)
 void
 GRMainWindow::updateWindow(int index)
 {
-    GList *list = gtk_container_get_children(GTK_CONTAINER(_mainBox));
+    GList *list = gtk_container_get_children (GTK_CONTAINER(_mainBox));
     for (GList *li = g_list_first(list); li != NULL; li = g_list_next(li))
     {
         GrmkitButton* button = (GrmkitButton*)li->data;
         int btnIndex = grmkit_button_get_index(button);
         if (btnIndex == index)
         {
-            gtk_widget_set_sensitive(GTK_WIDGET(button), false);
+            gtk_widget_set_sensitive (GTK_WIDGET(button), false);
+            const gchar* title = grmkit_button_get_title (GRMKIT_BUTTON(button));
+            gchar* update_title = g_strdup_printf ("%s (%s)", title, _("Installed"));
+
+            grmkit_button_set_title (GRMKIT_BUTTON(button), update_title);
+            g_free(update_title);
         }
     }
+
+    gtk_widget_set_sensitive (GTK_WIDGET(_closeButton), true);
 }
 
+void
+GRMainWindow::btnCloseClicked(GtkWidget* self, void *data)
+{
+    GRMainWindow* main = (GRMainWindow*)data;
+    main->close();
+}

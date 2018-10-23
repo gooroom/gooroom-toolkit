@@ -126,16 +126,55 @@ GRParser::createPackageVersion(string strFile)
     if (jsonFile == nullptr)
         return;
 
-
     size_t fileSize = fwrite(ouputConfig.c_str(), 1, ouputConfig.length(), jsonFile);
     fclose(jsonFile);
 }
 
 void
+GRParser::deletePackage(string packageName)
+{
+    vector <GRPackage*> vPackages;
+
+    Json::Value root;
+    std::ifstream json_doc(_configFile, std::ifstream::binary);
+    json_doc >> root;
+
+    Json::Value packages = root["packages"];
+
+    int size = packages.size();
+
+    if (size == 0)
+        return;
+
+    Json::Value newPackages = Json::arrayValue;
+    for (auto &v : root["packages"])
+    {
+        string strName = v["name"].isString() ? v["name"].asString() : "";
+        if (strName.compare(packageName) != 0)
+        {
+            newPackages.append(v);
+        }
+    }
+    root["packages"] = newPackages;
+
+    Json::StyledWriter writer;
+    std::string ouputConfig = writer.write(root);
+
+    FILE* jsonFile = NULL;
+    fopen_s(&jsonFile, _configFile.c_str(), "wb");
+
+    if (jsonFile == nullptr)
+        return;
+
+    size_t fileSize = fwrite(ouputConfig.c_str(), 1, ouputConfig.length(), jsonFile);
+    fclose(jsonFile);
+
+    return;
+}
+
+void
 GRParser::updatePackageVersion(string packageName, string version)
 {
-    cout << "updatePackageVersion" << endl;
-
     vector <GRPackage*> vPackages;
 
     Json::Value root;

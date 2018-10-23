@@ -54,8 +54,10 @@ GrmkitButton *grmkit_button_new        (void);
 void    grmkit_button_set_title (GrmkitButton *button, const char* szTitle);
 void    grmkit_button_set_description (GrmkitButton *button, const char* szDesc);
 void    grmkit_button_set_icon_from_file (GrmkitButton *button, const char* szFilePath);
-void	grmkit_button_set_index (GrmkitButton *button, int index);
-int	grmkit_button_get_index (GrmkitButton *button);
+void    grmkit_button_set_index (GrmkitButton *button, int index);
+int     grmkit_button_get_index (GrmkitButton *button);
+
+const gchar* grmkit_button_get_title (GrmkitButton *button);
 
 G_END_DECLS
 
