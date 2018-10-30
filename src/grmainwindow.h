@@ -64,6 +64,7 @@ class GRMainWindow : public GRWindow {
         void setApplication(GtkApplication *app) { _app = app; }
         GtkApplication* getApplication() { return _app; }
 
+    private:
         static void btnImageClicked(GtkWidget *self, void *data);
         static void btnCloseClicked(GtkWidget *self, void *data);
 };

@@ -146,3 +146,6 @@ msgstr "취소"
 
 msgid "Close"
 msgstr "닫기"
+
+msgid "Failed to install package"
+msgstr "패키지를 설치할 수 없습니다."

@@ -50,7 +50,7 @@ PKG_CHECK_MODULES([GTK], gtk+-3.0 >= 2.91.0)
 PKG_CHECK_MODULES([VTE], vte-2.91)
 PKG_CHECK_MODULES([JSONCPP], jsoncpp)
 
-AC_DEFINE_UNQUOTED([DEBUG_MSG], [], ["Output Debug Messasge"])
+#AC_DEFINE_UNQUOTED([DEBUG_MSG], [], ["Output Debug Messasge"])
 
 AC_FUNC_STRCOLL
 

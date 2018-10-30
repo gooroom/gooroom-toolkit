@@ -3,7 +3,7 @@
         "package" : [
             {
                 "name" : "gooroom-scratch-helper",
-                "exec" : "sudo apt -y install gooroom-scratch-helper",
+                "exec" : "gooroom-scratch-helper",
                 "url" : "",
                 "addr" : "",
                 "file" : "",
@@ -14,7 +14,7 @@
             },
             {
                 "name" : "veyon-master",
-                "exec" : "sudo apt -y install veyon",
+                "exec" : "veyon",
                 "url" : "",
                 "addr" : "",
                 "file" : "",

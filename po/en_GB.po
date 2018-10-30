@@ -146,3 +146,6 @@ msgstr "Cancel"
 
 msgid "Close"
 msgstr "Close"
+
+msgid "Failed to install package"
+msgstr "Failed to install package"

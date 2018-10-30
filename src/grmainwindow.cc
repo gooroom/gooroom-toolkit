@@ -30,6 +30,10 @@
 #include "gruserdialog.h"
 #include "grmkit-button.h"
 
+#include <gdk/gdkx.h>
+
+#define GDK_WINDOW_XWINDOW(win)	(gdk_x11_window_get_xid (win))
+
 GRMainWindow::GRMainWindow(const char* jsonFile)
    : GRWindow(NULL, "main"), _toolManager(NULL)
 {
@@ -137,9 +141,9 @@ void
 GRMainWindow::btnImageClicked(GtkWidget* self, void *data)
 {
     GRPackage* package = (GRPackage*)data;
-    string strName = package->name();
+    string strExec = package->exec();
     char szMsg[512];
-    snprintf(szMsg, sizeof(szMsg), _("Do you want to <b>%s</b> install?"), _(strName.c_str()));
+    snprintf(szMsg, sizeof(szMsg), _("Do you want to <b>%s</b> install?"), _(strExec.c_str()));
 
     GRMainWindow* me = (GRMainWindow*)g_object_get_data(G_OBJECT(self), "me");
     assert(me);
@@ -147,11 +151,59 @@ GRMainWindow::btnImageClicked(GtkWidget* self, void *data)
     if (!me->getUserDialog()->confirm(szMsg))
         return;
 
+    RGFlushInterface();
+
     GtkWidget* closeButton = me->_closeButton;
     gtk_widget_set_sensitive (closeButton, false);
 
-    me->getManager()->startDownload(package->getIndex());
-    me->getManager()->showError();
+    string strFormat = package->format();
+
+    if (strFormat.compare("package") == 0)
+    {
+        GtkWidget* main_window = me->window();
+        GdkWindow* g_window = gtk_widget_get_window(GTK_WIDGET(main_window));
+
+        string strPackage = strExec + "\tinstall\n";
+        const char* szPackage = utf8(strPackage.c_str());
+
+        char buff [L_tmpnam];
+        tmpnam(buff);
+
+        FILE* tmp;
+        tmp = fopen(buff, "wx");
+        fputs(szPackage, tmp);
+        rewind(tmp);
+
+        fclose(tmp);
+
+        char szCmd[512];
+        snprintf(szCmd, sizeof(szCmd), "'pkexec' '/usr/sbin/synaptic' '--hide-main-window' '--non-interactive' '--parent-window-id' '%u' '-o' 'Synaptic::closeZvg=false' '--set-selections-file' '%s'", GDK_WINDOW_XWINDOW(g_window), buff);
+
+        system(szCmd);
+
+        gtk_widget_set_sensitive (GTK_WIDGET(closeButton), true);
+
+        string strName = package->name();
+        gchar* gProgram = g_find_program_in_path (strName.c_str());
+        if (gProgram == NULL)
+        {
+            char* szFailed = _("Failed to install package");
+            me->getUserDialog()->error(szFailed);
+            RGFlushInterface();
+            return;
+        }
+
+        const gchar* title = grmkit_button_get_title (GRMKIT_BUTTON(self));
+        gchar* update_title = g_strdup_printf ("%s (%s)", title, _("Installed"));
+        grmkit_button_set_title (GRMKIT_BUTTON(self), update_title);
+        g_free(update_title);
+        gtk_widget_set_sensitive (GTK_WIDGET(self), false);
+    }
+    else
+    {
+        me->getManager()->startDownload(package->getIndex());
+        me->getManager()->showError();
+    }
 
     RGFlushInterface();
 }
