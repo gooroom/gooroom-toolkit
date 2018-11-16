@@ -26,6 +26,8 @@
 #include <json/json.h>
 #include "grparser.h"
 
+#include <unistd.h>
+
 #define fopen_s(fp, fmt, mode)          *(fp)=fopen( (fmt), (mode))
 
 GRParser::GRParser()
@@ -223,6 +225,9 @@ GRParser::updatePackageVersion(string packageName, string version)
 bool
 GRParser::checkInstallPackageVersion(string packageName, string version)
 {
+    if (0 != access (_configFile.c_str(), F_OK))
+        return false;
+
     vector <GRPackage*> vPackages;
 
     Json::Value root;

@@ -43,13 +43,16 @@ on_app_startup_cb (GtkApplication *app, gpointer data)
 #ifdef DEBUG_MSG
     cout << "on_app_startup_cb :: " << strInfoFile.c_str() << endl;
 #endif
-    GRMainWindow *mainWindow = new GRMainWindow(strInfoFile.c_str());
-    mainWindow->setApplication(app);
-    window = mainWindow->window();
-    gtk_application_add_window(app, GTK_WINDOW(window));
-    gtk_window_set_icon_name(GTK_WINDOW (window), "gooroom-toolkit");
 
-    RGFlushInterface();
+    if (0 == access (strInfoFile.c_str(), F_OK))
+    {
+        GRMainWindow *mainWindow = new GRMainWindow(strInfoFile.c_str());
+        mainWindow->setApplication(app);
+        window = mainWindow->window();
+        gtk_application_add_window(app, GTK_WINDOW(window));
+        gtk_window_set_icon_name(GTK_WINDOW (window), "gooroom-toolkit");
+        RGFlushInterface();
+    }
 }
 
 static void

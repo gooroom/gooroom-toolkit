@@ -65,19 +65,19 @@ GRPackageManager::~GRPackageManager()
 void
 GRPackageManager::initPackage(string strFile)
 {
+    if (FileExists(strFile))
+        _packages = _parser->getPackageFromJson(strFile);
+
     string strConfigDirectory = PACKAGE_VERDIR;
     string strConfigFile = strConfigDirectory + ".version.json";
     if (!FileExists(strConfigFile))
     {
-        bool bIsCreate = create_directory(strConfigDirectory.c_str());
-        if (!bIsCreate)
+        create_directory(strConfigDirectory.c_str());
+        if (!is_directory_exists(strConfigDirectory.c_str()))
             return;
 
         _parser->createPackageVersion(strConfigFile);
     }
-
-    if (FileExists(strFile))
-        _packages = _parser->getPackageFromJson(strFile);
 }
 
 vector<GRPackage*>
