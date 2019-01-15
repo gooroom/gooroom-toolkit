@@ -1,3 +1,28 @@
+gooroom-toolkit (0.2.1+grm1u1) unstable; urgency=medium
+
+  [ lee donghun ]
+  * [b7bb7fe9] Adding icons and scratch helper script
+  * [fd9b2558] Updating scratch helper script (scratch.sh)
+  * [e30eeeb9] Updating translation
+  * [656305c1] Adding pre-startup after scratch installation in scratch helper script and remove source white space
+  * [10e36188] Removing scratch modules and adding languages
+
+  [ cjheo ]
+  * [7cbcce37] Adding the polkit rule and the translation for korean and english
+  * [3ea0e71b] Updating desktop file
+  * [fe1f4ce2] Changing source directory structure for next version
+
+  [ jongkyung.woo ]
+  * [11cc7767] Modified install progress
+
+  [ donghun ]
+  * [34166d05] Changed package download logic to synaptic manager call
+  * [7957b2d4] Modified empty list on first run
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Tue, 15 Jan 2019 12:43:13 +0900
+
 gooroom-toolkit (0.1) unstable; urgency=medium
 
   * Initial Release.
