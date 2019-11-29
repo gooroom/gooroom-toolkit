@@ -1,8 +1,8 @@
 /* grfetchprogress.cc
  *
- * Copyright (C) 2015-2017 Gooroom <gooroom@gooroom.kr>
  * Copyright (c) 2000, 2001 Conectiva S/A
  *               2002, 2003 Michael Vogt <mvo@debian.org>
+ * Copyright (C) 2018-2019 Gooroom <gooroom@gooroom.kr>
  *
  * Author: Alfredo K. Kojima <kojima@conectiva.com.br>
  *         Michael Vogt <mvo@debian.org>

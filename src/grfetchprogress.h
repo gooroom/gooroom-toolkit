@@ -1,7 +1,7 @@
 /* grfetchprogress.h
  *
- * Copyright (C) 2015-2017 Gooroom <gooroom@gooroom.kr>
  * Copyright (c) 2000, 2001 Conectiva S/A
+ * Copyright (C) 2018-2019 Gooroom <gooroom@gooroom.kr>
  *
  * Author: Alfredo K. Kojima <kojima@conectiva.com.br>
  * This program is free software; you can redistribute it and/or

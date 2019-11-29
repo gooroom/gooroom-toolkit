@@ -1,6 +1,5 @@
 sbin_PROGRAMS = gooroom-toolkit
 
-
 BUILT_SOURCES = \
 	toolkit-resources.c \
 	toolkit-resources.h

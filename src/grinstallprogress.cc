@@ -1,7 +1,7 @@
 /* grinstallprogress.cc
  * 
- * Copyright (C) 2015-2017 Gooroom <gooroom@gooroom.kr>
  * Copyright (c) 2004 Canonical
+ * Copyright (C) 2018-2019 Gooroom <gooroom@gooroom.kr>
  *
  * Author: Michael Vogt <mvo@debian.org>
  *
